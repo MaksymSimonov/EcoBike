@@ -23,4 +23,16 @@ public class Bike implements Identifiable{
   public String getId() {
     return bikeId;
   }
+
+  @Override
+  public String toString() {
+    return "Bike{" +
+            "bikeId='" + bikeId + '\'' +
+            ", brand='" + brand + '\'' +
+            ", weight=" + weight +
+            ", availabilityLights=" + availabilityLights +
+            ", color='" + color + '\'' +
+            ", price='" + price + '\'' +
+            '}';
+  }
 }

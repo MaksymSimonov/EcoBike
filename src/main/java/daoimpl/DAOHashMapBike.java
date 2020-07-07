@@ -3,6 +3,7 @@ import dao.DAOFactory;
 import dao.Identifiable;
 import model.Bike;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,25 +78,21 @@ public class DAOHashMapBike implements DAOFactory<Identifiable> {
   }
 
   public void retrieveInitialData() {
-    try {
-      FileInputStream fis = new FileInputStream(file);
-      if (fis.available() > 0) {
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        List data = (ArrayList) ois.readObject();
-        data.forEach(o -> {
-          Bike bkg = (Bike) o;
-          map.put(bkg.getId(), bkg);
-        });
-        ois.close();
-        fis.close();
+    try (BufferedReader reader = new BufferedReader(
+            new InputStreamReader(
+                    new FileInputStream(file), StandardCharsets.UTF_8))){
+      String line;
+      int count = 0;
+      while ((line = reader.readLine()) != null) {
+        count++;
+        map.put(String.valueOf(count), new Bike(String.valueOf(count), "brand", 999, true, "color", "price"));
+        //System.out.println(line);
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("ecobike.txt file not found");
     } catch (IOException e) {
       e.printStackTrace();
       throw new IllegalArgumentException("Error while initializing stream");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
     }
   }
 

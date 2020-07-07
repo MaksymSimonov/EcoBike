@@ -5,7 +5,7 @@ import logger.Logger;
 
 
 public class ConsoleView {
-  private PassengerInputs passengerInputs = new PassengerInputs();
+  private UserInputs userInputs = new UserInputs();
   private Logger logger = new Logger();
   private ConsoleController consoleController = new ConsoleController();
 
@@ -37,37 +37,37 @@ public class ConsoleView {
 
   private void menuItemReader() throws InvalidUserInput {
     try {
-      switch (passengerInputs.getMenuItem()) {
+      switch (userInputs.getMenuItem()) {
         case 1:
-          consoleController.showCatalog();
-          logger.add("Show the entire EcoBike catalog");
+          consoleController.getAllBikes();
+          //logger.add("Show the entire EcoBike catalog");
           break;
         case 2:
           consoleController.addFoldingBike();
-          logger.add("Add a new folding bike");
+          //logger.add("Add a new folding bike");
           break;
         case 3:
           consoleController.addSpeedelec();
-          logger.add("Add a new speedelec");
+          //logger.add("Add a new speedelec");
           break;
         case 4:
           consoleController.addEBike();
-          logger.add("Add a new e-bike");
+          //logger.add("Add a new e-bike");
           break;
         case 5:
           consoleController.searchBike();
-          logger.add("Find the first item of a particular brand");
+          //logger.add("Find the first item of a particular brand");
           break;
         case 6:
           consoleController.saveChanges();
-          logger.add("Write to file");
+          //logger.add("Write to file");
           break;
         case 7:
           consoleController.saveChanges();
           System.exit(1);
           break;
         default:
-          System.out.println("Try to enter menu item again ");
+          System.out.println("Try to enter menu item again");
       }
     } catch (InvalidUserInput e) {
       System.out.println(e.getMessage());

@@ -3,6 +3,7 @@ package controller;
 import dao.Identifiable;
 import service.BikeService;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 public class BikeController {
