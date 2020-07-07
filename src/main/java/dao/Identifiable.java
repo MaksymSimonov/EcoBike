@@ -1,5 +1,5 @@
 package dao;
 
 public interface Identifiable {
-  String getId();
+  int getId();
 }

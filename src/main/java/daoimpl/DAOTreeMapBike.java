@@ -7,18 +7,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
-public class DAOHashMapBike implements DAOFactory<Identifiable> {
+public class DAOTreeMapBike implements DAOFactory<Identifiable> {
   private final File file;
-  private final HashMap<String, Identifiable> map;
+  private final TreeMap<Integer, Identifiable> map;
 
-  public DAOHashMapBike(){
+  public DAOTreeMapBike(){
     this(new File("./data", "ecobike.txt"));
   }
 
-  public DAOHashMapBike (File file){
+  public DAOTreeMapBike(File file){
     this.file = file;
-    this.map = new HashMap<>();
+    this.map = new TreeMap<>();
   }
 
   public Identifiable get(int id) {
@@ -31,7 +32,7 @@ public class DAOHashMapBike implements DAOFactory<Identifiable> {
 
   public boolean insert(Identifiable bike) {
     if (bike == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
-    String id = bike.getId();
+    int id = bike.getId();
     if (map.containsKey(id)) {
       return false;
     } else {
@@ -42,7 +43,7 @@ public class DAOHashMapBike implements DAOFactory<Identifiable> {
 
   public boolean update(Identifiable bike) {
     if (bike == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
-    String id = bike.getId();
+    int id = bike.getId();
     if (map.containsKey(id)) {
       map.put(id, bike);
       return true;
@@ -68,7 +69,7 @@ public class DAOHashMapBike implements DAOFactory<Identifiable> {
 
   public boolean remove(Identifiable bike) {
     if (bike == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
-    String id = bike.getId();
+    int id = bike.getId();
     if (map.containsKey(id)) {
       map.remove(id);
       return true;
@@ -82,11 +83,36 @@ public class DAOHashMapBike implements DAOFactory<Identifiable> {
             new InputStreamReader(
                     new FileInputStream(file), StandardCharsets.UTF_8))){
       String line;
-      int count = 0;
+      int countOfBikes = 1;
       while ((line = reader.readLine()) != null) {
-        count++;
-        map.put(String.valueOf(count), new Bike(String.valueOf(count), "brand", 999, true, "color", "price"));
-        //System.out.println(line);
+
+
+        String[] params = line.split("; ");
+        for (String param : params) {
+
+        }
+//        for (String param : params) {
+//          String[] item = param.split(":");
+//          switch (item[0]) {
+//            case "flightID": {
+//              flightId = Integer.parseInt(item[1]);
+//              break;
+//            }
+//            case "passengerID": {
+//              String[] passengersStr = item[1].split(",");
+//
+//              for (int j = 0; j < passengersStr.length; j++) {
+//                passengers.add(Integer.parseInt(passengersStr[j]));
+//              }
+//              break;
+//            }
+//          }
+//          insert(new Bike(flightId, passengers));
+//          passengers = new ArrayList<>();
+//        }
+
+        //map.put(countOfBikes, new Bike(countOfBikes, "brand", 999, true, "color", "price"));
+        countOfBikes++;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("ecobike.txt file not found");
