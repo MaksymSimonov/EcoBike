@@ -55,17 +55,4 @@ public class Bike implements Identifiable{
   public int getPrice() {
     return price;
   }
-
-  @Override
-  public String toString() {
-    return "Bike{" +
-            "bikeId=" + bikeId +
-            ", typeOfBike=" + typeOfBike.getFullNameOfType() +
-            ", brand='" + brand + '\'' +
-            ", weight=" + weight +
-            ", availabilityLights=" + availabilityLights +
-            ", color='" + color + '\'' +
-            ", price=" + price +
-            '}';
-  }
 }

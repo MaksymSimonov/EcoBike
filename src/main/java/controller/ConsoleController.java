@@ -9,9 +9,8 @@ public class ConsoleController {
   private BikeController bikeController = new BikeController();
   private UserInputs userInputs = new UserInputs();
 
-  public void getAllBikes() {
-    List<Identifiable> allBikes = bikeController.getAllBikes();
-    allBikes.forEach(System.out::println);
+  public List<Identifiable> getAllBikes() {
+    return bikeController.getAllBikes();
   }
 
   public void addFoldingBike() {
