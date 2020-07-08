@@ -1,12 +1,16 @@
 package controller;
 
-import view.PassengerInputs;
+import dao.Identifiable;
+import view.UserInputs;
+
+import java.util.List;
 
 public class ConsoleController {
-  private PassengerInputs passengerInputs = new PassengerInputs();
+  private BikeController bikeController = new BikeController();
+  private UserInputs userInputs = new UserInputs();
 
-  public void showCatalog() {
-
+  public List<Identifiable> getAllBikes() {
+    return bikeController.getAllBikes();
   }
 
   public void addFoldingBike() {
@@ -25,7 +29,7 @@ public class ConsoleController {
 
   }
 
-  public void saveChanges() {
-
+  public void saveData() {
+    bikeController.saveData();
   }
 }

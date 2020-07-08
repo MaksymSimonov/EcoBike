@@ -3,6 +3,7 @@ package controller;
 import dao.Identifiable;
 import service.BikeService;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 public class BikeController {
@@ -36,7 +37,7 @@ public class BikeController {
     return service.searchBike();
   }
 
-  public void save() {
-    service.save();
+  public void saveData() {
+    service.saveData();
   }
 }

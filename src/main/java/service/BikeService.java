@@ -1,15 +1,15 @@
 package service;
 
 import dao.Identifiable;
-import daoimpl.DAOHashMapBike;
+import daoimpl.DAOTreeMapBike;
 import java.io.File;
 import java.util.List;
 
 public class BikeService {
-  private final DAOHashMapBike data;
+  private final DAOTreeMapBike data;
 
   public BikeService(File file) {
-    data = new DAOHashMapBike(file);
+    data = new DAOTreeMapBike(file);
     data.retrieveInitialData();
   }
 
@@ -33,7 +33,7 @@ public class BikeService {
     return null;
   }
 
-  public void save() {
+  public void saveData() {
     data.saveData();
   }
 }
