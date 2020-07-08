@@ -2,6 +2,8 @@ package model;
 
 import dao.Identifiable;
 
+import java.util.Objects;
+
 public class Bike implements Identifiable{
   private final int bikeId;
   private final TypeOfBike typeOfBike;
@@ -54,5 +56,25 @@ public class Bike implements Identifiable{
 
   public int getPrice() {
     return price;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Bike bike = (Bike) o;
+    return bikeId == bike.bikeId &&
+            weight == bike.weight &&
+            availabilityLights == bike.availabilityLights &&
+            price == bike.price &&
+            typeOfBike == bike.typeOfBike &&
+            Objects.equals(brand, bike.brand) &&
+            Objects.equals(color, bike.color);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(bikeId, typeOfBike, brand, weight, availabilityLights, color, price);
   }
 }

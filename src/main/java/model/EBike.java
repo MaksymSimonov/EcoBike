@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class EBike extends Bike {
   private final int maximumSpeed;
   private final int batteryCapacity;
@@ -24,5 +26,28 @@ public class EBike extends Bike {
 
   public int getBatteryCapacity() {
     return batteryCapacity;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    EBike eBike = (EBike) o;
+    return this.getId() == eBike.getId() &&
+            this.getWeight() == eBike.getWeight() &&
+            this.isAvailabilityLights() == eBike.isAvailabilityLights() &&
+            this.getPrice() == eBike.getPrice() &&
+            Objects.equals(this.getTypeOfBike(), eBike.getTypeOfBike()) &&
+            Objects.equals(this.getBrand(), eBike.getBrand()) &&
+            Objects.equals(this.getColor(), eBike.getColor()) &&
+            maximumSpeed == eBike.maximumSpeed &&
+            batteryCapacity == eBike.batteryCapacity;
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(super.hashCode(), maximumSpeed, batteryCapacity);
   }
 }
