@@ -1,13 +1,11 @@
 package daoimpl;
 import dao.DAOFactory;
 import dao.Identifiable;
-import model.Bike;
+import model.*;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 public class DAOTreeMapBike implements DAOFactory<Identifiable> {
   private final File file;
@@ -78,6 +76,73 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
+  private FoldingBike retrieveFoldingBikeData(int countOfBikes, String dataLine){
+    int bikeId = countOfBikes;
+    String brand;
+    TypeOfBike typeOfBike = TypeOfBike.FOLDINGBIKE;
+    int sizeOfWheels;
+    int numberOfGears;
+    int weight;
+    boolean availabilityLights;
+    String color;
+    int price;
+
+    String[] params = dataLine.split("; ");
+    brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
+    sizeOfWheels = Integer.valueOf(params[1]);
+    numberOfGears = Integer.valueOf(params[2]);
+    weight = Integer.valueOf(params[3]);
+    availabilityLights = Boolean.valueOf(params[4]);
+    color = params[5];
+    price = Integer.valueOf(params[6]);
+
+    return new FoldingBike(bikeId, TypeOfBike.FOLDINGBIKE, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
+  }
+
+  private Speedelec retrieveSpeedelecData(int countOfBikes, String dataLine){
+    int bikeId = countOfBikes;
+    TypeOfBike typeOfBike = TypeOfBike.SPEEDELEC;
+    String brand;
+    int maximumSpeed;
+    int weight;
+    boolean availabilityLights;
+    int batteryCapacity;
+    String color;
+    int price;
+
+    String[] params = dataLine.split("; ");
+    brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
+    maximumSpeed = Integer.valueOf(params[1]);
+    weight = Integer.valueOf(params[2]);
+    availabilityLights = Boolean.valueOf(params[3]);
+    batteryCapacity = Integer.valueOf(params[4]);
+    color = params[5];
+    price = Integer.valueOf(params[6]);
+    return new Speedelec(bikeId, typeOfBike, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
+  }
+
+  private EBike retrieveEBikeData(int countOfBikes, String dataLine){
+    int bikeId = countOfBikes;
+    TypeOfBike typeOfBike = TypeOfBike.EBIKE;
+    String brand;
+    int maximumSpeed;
+    int weight;
+    boolean availabilityLights;
+    int batteryCapacity;
+    String color;
+    int price;
+
+    String[] params = dataLine.split("; ");
+    brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
+    maximumSpeed = Integer.valueOf(params[1]);
+    weight = Integer.valueOf(params[2]);
+    availabilityLights = Boolean.valueOf(params[3]);
+    batteryCapacity = Integer.valueOf(params[4]);
+    color = params[5];
+    price = Integer.valueOf(params[6]);
+    return new EBike(bikeId, typeOfBike, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
+  }
+
   public void retrieveInitialData() {
     try (BufferedReader reader = new BufferedReader(
             new InputStreamReader(
@@ -85,33 +150,16 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
       String line;
       int countOfBikes = 1;
       while ((line = reader.readLine()) != null) {
-
-
-        String[] params = line.split("; ");
-        for (String param : params) {
-
+        if(line.contains(TypeOfBike.FOLDINGBIKE.getFullNameOfType())){
+          FoldingBike foldingBike = retrieveFoldingBikeData(countOfBikes, line);
+          insert(foldingBike);
+        } else if(line.contains(TypeOfBike.SPEEDELEC.getFullNameOfType())) {
+          Speedelec speedelec = retrieveSpeedelecData(countOfBikes, line);
+          insert(speedelec);
+        } else if(line.contains(TypeOfBike.EBIKE.getFullNameOfType())) {
+          EBike eBike = retrieveEBikeData(countOfBikes, line);
+          insert(eBike);
         }
-//        for (String param : params) {
-//          String[] item = param.split(":");
-//          switch (item[0]) {
-//            case "flightID": {
-//              flightId = Integer.parseInt(item[1]);
-//              break;
-//            }
-//            case "passengerID": {
-//              String[] passengersStr = item[1].split(",");
-//
-//              for (int j = 0; j < passengersStr.length; j++) {
-//                passengers.add(Integer.parseInt(passengersStr[j]));
-//              }
-//              break;
-//            }
-//          }
-//          insert(new Bike(flightId, passengers));
-//          passengers = new ArrayList<>();
-//        }
-
-        //map.put(countOfBikes, new Bike(countOfBikes, "brand", 999, true, "color", "price"));
         countOfBikes++;
       }
     } catch (FileNotFoundException e) {

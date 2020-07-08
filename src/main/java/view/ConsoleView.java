@@ -5,9 +5,9 @@ import logger.Logger;
 
 
 public class ConsoleView {
+  private ConsoleController consoleController = new ConsoleController();
   private UserInputs userInputs = new UserInputs();
   private Logger logger = new Logger();
-  private ConsoleController consoleController = new ConsoleController();
 
   public void startApp() {
     try {
