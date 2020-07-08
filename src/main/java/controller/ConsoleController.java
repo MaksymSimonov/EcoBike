@@ -29,7 +29,7 @@ public class ConsoleController {
 
   }
 
-  public void saveChanges() {
-
+  public void saveData() {
+    bikeController.saveData();
   }
 }

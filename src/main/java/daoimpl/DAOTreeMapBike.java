@@ -5,6 +5,9 @@ import model.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class DAOTreeMapBike implements DAOFactory<Identifiable> {
@@ -172,11 +175,35 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
 
   public void saveData() {
     try {
-      FileOutputStream fos = new FileOutputStream(file);
-      ObjectOutputStream oos = new ObjectOutputStream(fos);
-      oos.writeObject(new ArrayList<>(map.values()));
-      oos.close();
-      fos.close();
+      OutputStream outputStream = new FileOutputStream(file);
+      String line = null;
+
+      for(Map.Entry<Integer, Identifiable> item : map.entrySet()){
+        Bike bike = (Bike)item.getValue();
+        switch (bike.getTypeOfBike()) {
+          case FOLDINGBIKE: {
+            FoldingBike foldingBike = (FoldingBike)bike;
+            line = convertFoldingBikeToStr(foldingBike);
+            break;
+          }
+          case SPEEDELEC: {
+            Speedelec speedelec = (Speedelec)bike;
+            line = convertSpeedelecToStr(speedelec);
+            break;
+          }
+          case EBIKE: {
+            EBike eBike = (EBike)bike;
+            line = convertEBikeToStr(eBike);
+            break;
+          }
+          default: {
+
+          }
+        }
+        outputStream.write(line.getBytes(), 0, line.length());
+      }
+
+      outputStream.close();
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("ecobike.txt file not found");
     } catch (IOException e) {
@@ -184,4 +211,50 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
       throw new IllegalArgumentException("Error while initializing stream");
     }
   }
+
+  private String convertFoldingBikeToStr(FoldingBike foldingBike){
+    StringBuffer stringBuffer = new StringBuffer();
+    stringBuffer.append(foldingBike.getTypeOfBike().getFullNameOfType()).append(' ')
+            .append(foldingBike.getBrand()).append("; ")
+            .append(foldingBike.getSizeOfWheels()).append("; ")
+            .append(foldingBike.getNumberOfGears()).append("; ")
+            .append(foldingBike.getWeight()).append("; ")
+            .append(String.valueOf(foldingBike.isAvailabilityLights())
+                    .toUpperCase()).append("; ")
+            .append(foldingBike.getColor()).append("; ")
+            .append(foldingBike.getPrice())
+            .append('\n');
+    return stringBuffer.toString();
+  }
+
+  private String convertSpeedelecToStr(Speedelec speedelec){
+    StringBuffer stringBuffer = new StringBuffer();
+    stringBuffer.append(speedelec.getTypeOfBike().getFullNameOfType()).append(' ')
+            .append(speedelec.getBrand()).append("; ")
+            .append(speedelec.getMaximumSpeed()).append("; ")
+            .append(speedelec.getWeight()).append("; ")
+            .append(String.valueOf(speedelec.isAvailabilityLights())
+                    .toUpperCase()).append("; ")
+            .append(speedelec.getBatteryCapacity()).append("; ")
+            .append(speedelec.getColor()).append("; ")
+            .append(speedelec.getPrice())
+            .append('\n');
+    return stringBuffer.toString();
+  }
+
+  private String convertEBikeToStr(EBike eBike){
+    StringBuffer stringBuffer = new StringBuffer();
+    stringBuffer.append(eBike.getTypeOfBike().getFullNameOfType()).append(' ')
+            .append(eBike.getBrand()).append("; ")
+            .append(eBike.getMaximumSpeed()).append("; ")
+            .append(eBike.getWeight()).append("; ")
+            .append(String.valueOf(eBike.isAvailabilityLights())
+                    .toUpperCase()).append("; ")
+            .append(eBike.getBatteryCapacity()).append("; ")
+            .append(eBike.getColor()).append("; ")
+            .append(eBike.getPrice())
+            .append('\n');
+    return stringBuffer.toString();
+  }
+
 }

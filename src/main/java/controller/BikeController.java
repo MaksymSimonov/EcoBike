@@ -37,7 +37,7 @@ public class BikeController {
     return service.searchBike();
   }
 
-  public void save() {
-    service.save();
+  public void saveData() {
+    service.saveData();
   }
 }

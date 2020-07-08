@@ -66,11 +66,14 @@ public class ConsoleView {
           //logger.add("Find the first item of a particular brand");
           break;
         case 6:
-          consoleController.saveChanges();
+          consoleController.saveData();
+          System.out.println("Save completed");
           //logger.add("Write to file");
           break;
         case 7:
-          consoleController.saveChanges();
+          consoleController.saveData();
+          System.out.println("Save completed");
+          System.out.println("Goodbye!");
           System.exit(1);
           break;
         default:
@@ -89,18 +92,18 @@ public class ConsoleView {
   private void showBikes(List<Identifiable> bikes) {
     bikes.forEach(item -> {
       Bike bike = (Bike) item;
-      switch (bike.getTypeOfBike().getFullNameOfType()) {
-        case "FOLDING BIKE": {
+      switch (bike.getTypeOfBike()) {
+        case FOLDINGBIKE: {
           FoldingBike foldingBike = (FoldingBike) bike;
           showFoldingBike(foldingBike);
           break;
         }
-        case "SPEEDELEC": {
+        case SPEEDELEC: {
           Speedelec speedelec = (Speedelec) bike;
           showSpeedelec(speedelec);
           break;
         }
-        case "E-BIKE": {
+        case EBIKE: {
           EBike eBike = (EBike) bike;
           showEBike(eBike);
           break;

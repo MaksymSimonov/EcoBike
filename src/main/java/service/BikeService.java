@@ -33,7 +33,7 @@ public class BikeService {
     return null;
   }
 
-  public void save() {
+  public void saveData() {
     data.saveData();
   }
 }
