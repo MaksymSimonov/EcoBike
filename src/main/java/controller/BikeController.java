@@ -1,6 +1,9 @@
 package controller;
 
 import dao.Identifiable;
+import model.EBike;
+import model.FoldingBike;
+import model.Speedelec;
 import service.BikeService;
 import java.io.File;
 import java.util.HashMap;
@@ -21,16 +24,16 @@ public class BikeController {
     return service.getAllBikes();
   }
 
-  public Identifiable addFoldingBike(Identifiable foldingBike) {
-    return service.addFoldingBike(foldingBike);
+  public void addFoldingBike(FoldingBike foldingBike) {
+    service.addFoldingBike(foldingBike);
   }
 
-  public Identifiable addSpeedelec(Identifiable speedelec) {
-    return service.addSpeedelec(speedelec);
+  public void addSpeedelec(Speedelec speedelec) {
+    service.addSpeedelec(speedelec);
   }
 
-  public Identifiable addEBike(Identifiable eBike) {
-    return service.addEBike(eBike);
+  public void addEBike(EBike eBike) {
+    service.addEBike(eBike);
   }
 
   public List<Identifiable> searchBike() {

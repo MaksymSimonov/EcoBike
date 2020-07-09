@@ -3,8 +3,13 @@ package model;
 import java.util.Objects;
 
 public class Speedelec extends Bike {
-  private final int maximumSpeed;
-  private final int batteryCapacity;
+  private final TypeOfBike typeOfBike = TypeOfBike.SPEEDELEC;
+  private int maximumSpeed;
+  private int batteryCapacity;
+
+  public Speedelec() {
+
+  }
 
   public Speedelec(int bikeId,
                    TypeOfBike typeOfBike,
@@ -20,12 +25,25 @@ public class Speedelec extends Bike {
     this.batteryCapacity = batteryCapacity;
   }
 
+  @Override
+  public TypeOfBike getTypeOfBike() {
+    return typeOfBike;
+  }
+
   public int getMaximumSpeed() {
     return maximumSpeed;
   }
 
   public int getBatteryCapacity() {
     return batteryCapacity;
+  }
+
+  public void setMaximumSpeed(int maximumSpeed) {
+    this.maximumSpeed = maximumSpeed;
+  }
+
+  public void setBatteryCapacity(int batteryCapacity) {
+    this.batteryCapacity = batteryCapacity;
   }
 
   @Override

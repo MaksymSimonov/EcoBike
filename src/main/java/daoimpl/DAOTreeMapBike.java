@@ -177,7 +177,6 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     try {
       OutputStream outputStream = new FileOutputStream(file);
       String line = null;
-
       for(Map.Entry<Integer, Identifiable> item : map.entrySet()){
         Bike bike = (Bike)item.getValue();
         switch (bike.getTypeOfBike()) {
