@@ -24,16 +24,16 @@ public class BikeController {
     return service.getAllBikes();
   }
 
-  public void addFoldingBike(FoldingBike foldingBike) {
-    service.addFoldingBike(foldingBike);
+  public boolean addFoldingBike(FoldingBike foldingBike) {
+    return service.addFoldingBike(foldingBike);
   }
 
-  public void addSpeedelec(Speedelec speedelec) {
-    service.addSpeedelec(speedelec);
+  public boolean addSpeedelec(Speedelec speedelec) {
+    return service.addSpeedelec(speedelec);
   }
 
-  public void addEBike(EBike eBike) {
-    service.addEBike(eBike);
+  public boolean addEBike(EBike eBike) {
+    return service.addEBike(eBike);
   }
 
   public List<Identifiable> searchBike() {

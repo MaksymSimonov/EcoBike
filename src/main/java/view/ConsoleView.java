@@ -92,123 +92,6 @@ public class ConsoleView {
     }
   }
 
-  private void addingFoldingBike(){
-    FoldingBike foldingBike = new FoldingBike();
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("----------Adding a new folding bike-----------");
-    try {
-      System.out.println("Enter brand name:");
-      String brand = reader.readLine();
-      foldingBike.setBrand(brand);
-
-      System.out.println("Enter the size of wheels(in inch):");
-      int sizeOfWheels = Integer.parseInt(reader.readLine());
-      foldingBike.setSizeOfWheels(sizeOfWheels);
-
-      System.out.println("Enter the number of  gears:");
-      int numberOfGears = Integer.parseInt(reader.readLine());
-      foldingBike.setNumberOfGears(numberOfGears) ;
-
-      System.out.println("Enter weight(in grams):");
-      int weight = Integer.parseInt(reader.readLine());
-      foldingBike.setWeight(weight);
-
-      System.out.println("Enter availability lights(TRUE/FALSE):");
-      boolean availabilityLights = Boolean.parseBoolean(reader.readLine());
-      foldingBike.setAvailabilityLights(availabilityLights);
-
-      System.out.println("Enter color:");
-      String color = reader.readLine();
-      foldingBike.setColor(color);
-
-      System.out.println("Enter price:");
-      int price = Integer.parseInt(reader.readLine());
-      foldingBike.setPrice(price);
-
-      consoleController.addFoldingBike(foldingBike);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private void addingSpeedelec(){
-    Speedelec speedelec = new Speedelec();
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("------------Adding a new speedelec-------------");
-    try {
-      System.out.println("Enter brand name:");
-      String brand = reader.readLine();
-      speedelec.setBrand(brand);
-
-      System.out.println("Enter maximum speed(in km/h):");
-      int maximumSpeed = Integer.parseInt(reader.readLine());
-      speedelec.setMaximumSpeed(maximumSpeed);
-
-      System.out.println("Enter weight(in grams):");
-      int weight = Integer.parseInt(reader.readLine());
-      speedelec.setWeight(weight);
-
-      System.out.println("Enter availability lights(TRUE/FALSE):");
-      boolean availabilityLights = Boolean.parseBoolean(reader.readLine());
-      speedelec.setAvailabilityLights(availabilityLights);
-
-      System.out.println("Enter battery capacity(in mAh):");
-      int batteryCapacity = Integer.parseInt(reader.readLine());
-      speedelec.setBatteryCapacity(batteryCapacity);
-
-      System.out.println("Enter color:");
-      String color = reader.readLine();
-      speedelec.setColor(color);
-
-      System.out.println("Enter price:");
-      int price = Integer.parseInt(reader.readLine());
-      speedelec.setPrice(price);
-
-      consoleController.addSpeedelec(speedelec);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  private void addingEBike(){
-    EBike eBike = new EBike();
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("------------Adding a new e-bike-------------");
-    try {
-      System.out.println("Enter brand name:");
-      String brand = reader.readLine();
-      eBike.setBrand(brand);
-
-      System.out.println("Enter maximum speed(in km/h):");
-      int maximumSpeed = Integer.parseInt(reader.readLine());
-      eBike.setMaximumSpeed(maximumSpeed);
-
-      System.out.println("Enter weight(in grams):");
-      int weight = Integer.parseInt(reader.readLine());
-      eBike.setWeight(weight);
-
-      System.out.println("Enter availability lights(TRUE/FALSE):");
-      boolean availabilityLights = Boolean.parseBoolean(reader.readLine());
-      eBike.setAvailabilityLights(availabilityLights);
-
-      System.out.println("Enter battery capacity(in mAh):");
-      int batteryCapacity = Integer.parseInt(reader.readLine());
-      eBike.setBatteryCapacity(batteryCapacity);
-
-      System.out.println("Enter color:");
-      String color = reader.readLine();
-      eBike.setColor(color);
-
-      System.out.println("Enter price:");
-      int price = Integer.parseInt(reader.readLine());
-      eBike.setPrice(price);
-
-      consoleController.addEBike(eBike);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
   private void showBikes(List<Identifiable> bikes) {
     bikes.forEach(item -> {
       Bike bike = (Bike) item;
@@ -261,4 +144,123 @@ public class ConsoleView {
             eBike.isAvailabilityLights()?"":" no");
     System.out.printf("Price: %d euros.\n", eBike.getPrice());
   }
+
+  private void addingFoldingBike(){
+    FoldingBike foldingBike = new FoldingBike();
+    System.out.println("-----------Adding a new folding bike-----------");
+    boolean successfully = consoleController.addFoldingBike((FoldingBike) bikeDataReader(foldingBike));
+    if (successfully){
+      System.out.println("--------The bike has been added. Thank--------\n");
+    } else {
+      System.out.println("--------Something was wrong. Try again--------\n");
+    }
+  }
+
+  private void addingSpeedelec(){
+    Speedelec speedelec = new Speedelec();
+    System.out.println("------------Adding a new speedelec-------------");
+    boolean successfully = consoleController.addSpeedelec((Speedelec) bikeDataReader(speedelec));
+    if (successfully){
+      System.out.println("--------The bike has been added. Thank--------\n");
+    } else {
+      System.out.println("--------Something was wrong. Try again--------\n");
+    }
+  }
+
+  private void addingEBike(){
+    EBike eBike = new EBike();
+    System.out.println("-------------Adding a new e-bike---------------");
+    boolean successfully = consoleController.addEBike((EBike) bikeDataReader(eBike));
+    if (successfully){
+      System.out.println("--------The bike has been added. Thank--------\n");
+    } else {
+      System.out.println("--------Something was wrong. Try again--------\n");
+    }
+  }
+
+  private Identifiable bikeDataReader(Identifiable identifiable) {
+    Bike bike = (Bike)identifiable;
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    try {
+      System.out.println("Enter brand name:");
+      String brand = reader.readLine();
+      bike.setBrand(brand);
+
+      System.out.println("Enter weight(in grams):");
+      int weight = Integer.parseInt(reader.readLine());
+      bike.setWeight(weight);
+
+      System.out.println("Enter availability lights(TRUE/FALSE):");
+      boolean availabilityLights = Boolean.parseBoolean(reader.readLine());
+      bike.setAvailabilityLights(availabilityLights);
+
+      System.out.println("Enter color:");
+      String color = reader.readLine();
+      bike.setColor(color);
+
+      System.out.println("Enter price:");
+      int price = Integer.parseInt(reader.readLine());
+      bike.setPrice(price);
+
+      switch (bike.getTypeOfBike()) {
+        case FOLDINGBIKE: {
+          FoldingBike foldingBike = (FoldingBike) bike;
+
+          System.out.println("Enter the size of wheels(in inch):");
+          int sizeOfWheels = Integer.parseInt(reader.readLine());
+          foldingBike.setSizeOfWheels(sizeOfWheels);
+
+          System.out.println("Enter the number of  gears:");
+          int numberOfGears = Integer.parseInt(reader.readLine());
+          foldingBike.setNumberOfGears(numberOfGears);
+
+          return foldingBike;
+        }
+
+        case SPEEDELEC: {
+          Speedelec speedelec = (Speedelec) bike;
+
+          System.out.println("Enter maximum speed(in km/h):");
+          int maximumSpeed = Integer.parseInt(reader.readLine());
+          speedelec.setMaximumSpeed(maximumSpeed);
+
+          System.out.println("Enter battery capacity(in mAh):");
+          int batteryCapacity = Integer.parseInt(reader.readLine());
+          speedelec.setBatteryCapacity(batteryCapacity);
+
+          return speedelec;
+        }
+
+        case EBIKE: {
+          EBike eBike = (EBike) bike;
+          System.out.println("Enter maximum speed(in km/h):");
+          int maximumSpeed = Integer.parseInt(reader.readLine());
+          eBike.setMaximumSpeed(maximumSpeed);
+
+          System.out.println("Enter battery capacity(in mAh):");
+          int batteryCapacity = Integer.parseInt(reader.readLine());
+          eBike.setBatteryCapacity(batteryCapacity);
+
+          return eBike;
+        }
+
+        default: {
+
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return bike;
+  }
+
+//  private boolean isNumeric(String str) {
+//    try {
+//      Integer.parseInt(str);
+//    } catch(NumberFormatException e) {
+//      return false;
+//    }
+//    return true;
+//  }
 }

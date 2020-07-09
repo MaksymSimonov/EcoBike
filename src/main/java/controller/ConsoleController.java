@@ -16,16 +16,16 @@ public class ConsoleController {
     return bikeController.getAllBikes();
   }
 
-  public void addFoldingBike(FoldingBike foldingBike) {
-    bikeController.addFoldingBike(foldingBike);
+  public boolean addFoldingBike(FoldingBike foldingBike) {
+    return bikeController.addFoldingBike(foldingBike);
   }
 
-  public void addSpeedelec(Speedelec speedelec) {
-    bikeController.addSpeedelec(speedelec);
+  public boolean addSpeedelec(Speedelec speedelec) {
+    return bikeController.addSpeedelec(speedelec);
   }
 
-  public void addEBike(EBike eBike) {
-    bikeController.addEBike(eBike);
+  public boolean addEBike(EBike eBike) {
+    return bikeController.addEBike(eBike);
   }
 
   public void searchBike() {
