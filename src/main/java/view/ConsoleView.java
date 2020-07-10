@@ -255,12 +255,5 @@ public class ConsoleView {
     return bike;
   }
 
-//  private boolean isNumeric(String str) {
-//    try {
-//      Integer.parseInt(str);
-//    } catch(NumberFormatException e) {
-//      return false;
-//    }
-//    return true;
-//  }
+
 }
