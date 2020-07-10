@@ -22,7 +22,8 @@ public class ConsoleView {
   public void startApp() {
     try {
       this.showMenu();
-    } catch (InvalidUserInput e) {
+    } catch (Exception e) {
+      System.out.println("startApp");
       System.out.println(e.getMessage());
       if (e.getCause() != null) {
         System.out.println("Original exception " + e.getCause().getMessage());
@@ -80,9 +81,10 @@ public class ConsoleView {
           System.exit(1);
           break;
         default:
-          System.out.println("Try to enter menu item again");
+          System.out.println("Try to enter menu item again(from 1 to 7)");
       }
-    } catch (InvalidUserInput e) {
+    } catch (Exception e) {
+      System.out.println("menuItemReader");
       System.out.println(e.getMessage());
       if (e.getCause() != null) {
         System.out.println("Original exception " + e.getCause().getMessage());
@@ -110,9 +112,6 @@ public class ConsoleView {
           EBike eBike = (EBike) bike;
           showEBike(eBike);
           break;
-        }
-        default: {
-
         }
       }
     });
@@ -145,115 +144,66 @@ public class ConsoleView {
     System.out.printf("Price: %d euros.\n", eBike.getPrice());
   }
 
-  private void addingFoldingBike(){
+  private void addingFoldingBike() throws IOException {
     FoldingBike foldingBike = new FoldingBike();
     System.out.println("-----------Adding a new folding bike-----------");
     boolean successfully = consoleController.addFoldingBike((FoldingBike) bikeDataReader(foldingBike));
     if (successfully){
-      System.out.println("--------The bike has been added. Thank--------\n");
+      System.out.println("-----The new folding bike has been added. Thank-----\n");
     } else {
       System.out.println("--------Something was wrong. Try again--------\n");
     }
   }
 
-  private void addingSpeedelec(){
+  private void addingSpeedelec() throws IOException {
     Speedelec speedelec = new Speedelec();
     System.out.println("------------Adding a new speedelec-------------");
     boolean successfully = consoleController.addSpeedelec((Speedelec) bikeDataReader(speedelec));
     if (successfully){
-      System.out.println("--------The bike has been added. Thank--------\n");
+      System.out.println("------The new speedelec has been added. Thank------\n");
     } else {
       System.out.println("--------Something was wrong. Try again--------\n");
     }
   }
 
-  private void addingEBike(){
+  private void addingEBike() throws IOException {
     EBike eBike = new EBike();
     System.out.println("-------------Adding a new e-bike---------------");
     boolean successfully = consoleController.addEBike((EBike) bikeDataReader(eBike));
     if (successfully){
-      System.out.println("--------The bike has been added. Thank--------\n");
+      System.out.println("------The new e-bike has been added. Thank------\n");
     } else {
       System.out.println("--------Something was wrong. Try again--------\n");
     }
   }
 
-  private Identifiable bikeDataReader(Identifiable identifiable) {
+  private Identifiable bikeDataReader(Identifiable identifiable) throws IOException {
     Bike bike = (Bike)identifiable;
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    try {
-      System.out.println("Enter brand name:");
-      String brand = reader.readLine();
-      bike.setBrand(brand);
-
-      System.out.println("Enter weight(in grams):");
-      int weight = Integer.parseInt(reader.readLine());
-      bike.setWeight(weight);
-
-      System.out.println("Enter availability lights(TRUE/FALSE):");
-      boolean availabilityLights = Boolean.parseBoolean(reader.readLine());
-      bike.setAvailabilityLights(availabilityLights);
-
-      System.out.println("Enter color:");
-      String color = reader.readLine();
-      bike.setColor(color);
-
-      System.out.println("Enter price:");
-      int price = Integer.parseInt(reader.readLine());
-      bike.setPrice(price);
-
-      switch (bike.getTypeOfBike()) {
-        case FOLDINGBIKE: {
-          FoldingBike foldingBike = (FoldingBike) bike;
-
-          System.out.println("Enter the size of wheels(in inch):");
-          int sizeOfWheels = Integer.parseInt(reader.readLine());
-          foldingBike.setSizeOfWheels(sizeOfWheels);
-
-          System.out.println("Enter the number of  gears:");
-          int numberOfGears = Integer.parseInt(reader.readLine());
-          foldingBike.setNumberOfGears(numberOfGears);
-
-          return foldingBike;
-        }
-
-        case SPEEDELEC: {
-          Speedelec speedelec = (Speedelec) bike;
-
-          System.out.println("Enter maximum speed(in km/h):");
-          int maximumSpeed = Integer.parseInt(reader.readLine());
-          speedelec.setMaximumSpeed(maximumSpeed);
-
-          System.out.println("Enter battery capacity(in mAh):");
-          int batteryCapacity = Integer.parseInt(reader.readLine());
-          speedelec.setBatteryCapacity(batteryCapacity);
-
-          return speedelec;
-        }
-
-        case EBIKE: {
-          EBike eBike = (EBike) bike;
-          System.out.println("Enter maximum speed(in km/h):");
-          int maximumSpeed = Integer.parseInt(reader.readLine());
-          eBike.setMaximumSpeed(maximumSpeed);
-
-          System.out.println("Enter battery capacity(in mAh):");
-          int batteryCapacity = Integer.parseInt(reader.readLine());
-          eBike.setBatteryCapacity(batteryCapacity);
-
-          return eBike;
-        }
-
-        default: {
-
-        }
+    bike.setBrand(userInputs.getBrand());
+    bike.setWeight(userInputs.getWeight());
+    bike.setAvailabilityLights(userInputs.getAvailabilityLights());
+    bike.setColor(userInputs.getColor());
+    bike.setPrice(userInputs.getPrice());
+    switch (bike.getTypeOfBike()) {
+      case FOLDINGBIKE: {
+        FoldingBike foldingBike = (FoldingBike)bike;
+        foldingBike.setSizeOfWheels(userInputs.getSizeOfWheels());
+        foldingBike.setNumberOfGears(userInputs.getNumberOfGears());
+        return foldingBike;
       }
-    } catch (IOException e) {
-      e.printStackTrace();
+      case SPEEDELEC: {
+        Speedelec speedelec = (Speedelec)bike;
+        speedelec.setMaximumSpeed(userInputs.getMaximumSpeed());
+        speedelec.setBatteryCapacity(userInputs.getBatteryCapacity());
+        return speedelec;
+      }
+      case EBIKE: {
+        EBike eBike = (EBike)bike;
+        eBike.setMaximumSpeed(userInputs.getMaximumSpeed());
+        eBike.setBatteryCapacity(userInputs.getBatteryCapacity());
+        return eBike;
+      }
     }
-
     return bike;
   }
-
-
 }

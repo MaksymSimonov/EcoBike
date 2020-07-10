@@ -1,92 +1,92 @@
 package view;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class UserInputs {
-  private Scanner scan = new Scanner(System.in);
+  private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
   public int getMenuItem() throws InvalidUserInput {
-    int input = 0;
+    String input = null;
+    int number;
     try {
-      input = scan.nextInt();
-    } catch (InputMismatchException e) {
-      scan.nextLine();
+      input = reader.readLine();
+      number = Integer.parseInt(input);
+    } catch (Exception e) {
       throw new InvalidUserInput("Wrong input", input, e);
     }
-    return input;
+    return number;
   }
 
-  public String getBrand() {
+  public String getBrand() throws IOException {
     System.out.println("Enter brand name:");
-    String brand = scan.nextLine();
-    return brand;
+    return reader.readLine();
   }
 
-  public int getWeight() {
+  public int getWeight() throws IOException {
     System.out.println("Enter weight(in grams):");
     String weight;
-    while (!isNumeric(weight = scan.nextLine())) {
+    if (!isPositiveNumber(weight = reader.readLine())) {
       this.getWeight();
     }
     return Integer.parseInt(weight);
   }
 
-  public boolean getAvailabilityLights() {
+  public boolean getAvailabilityLights() throws IOException {
     System.out.println("Enter availability lights(TRUE/FALSE):");
-    String availabilityLights;
-    while (!isBooleanType(availabilityLights = scan.nextLine())) {
+    String availabilityLights = reader.readLine();
+    if (!isBooleanType(availabilityLights)) {
       this.getAvailabilityLights();
     }
     return Boolean.parseBoolean(availabilityLights);
   }
 
-  public String getColor() {
+  public String getColor() throws IOException {
     System.out.println("Enter color:");
-    String color = scan.nextLine();
-    return color;
+    return reader.readLine();
   }
 
-  public int getPrice() {
+  public int getPrice() throws IOException {
     System.out.println("Enter price:");
     String price;
-    while (!isNumeric(price = scan.nextLine())) {
+    if (!isPositiveNumber(price = reader.readLine())) {
       this.getPrice();
     }
     return Integer.parseInt(price);
   }
 
-  public int getSizeOfWheels() {
+  public int getSizeOfWheels() throws IOException {
     System.out.println("Enter the size of wheels(in inch):");
     String sizeOfWheels;
-    while (!isNumeric(sizeOfWheels = scan.nextLine())) {
+    if (!isPositiveNumber(sizeOfWheels = reader.readLine())) {
       this.getSizeOfWheels();
     }
     return Integer.parseInt(sizeOfWheels);
   }
 
-  public int getNumberOfGears() {
+  public int getNumberOfGears() throws IOException {
     System.out.println("Enter the number of  gears:");
     String numberOfGears;
-    while (!isNumeric(numberOfGears = scan.nextLine())) {
+    if (!isPositiveNumber(numberOfGears = reader.readLine())) {
       this.getNumberOfGears();
     }
     return Integer.parseInt(numberOfGears);
   }
 
-  public int getMaximumSpeed() {
+  public int getMaximumSpeed() throws IOException {
     System.out.println("Enter maximum speed(in km/h):");
     String maximumSpeed;
-    while (!isNumeric(maximumSpeed = scan.nextLine())) {
+    if (!isPositiveNumber(maximumSpeed = reader.readLine())) {
       this.getMaximumSpeed();
     }
     return Integer.parseInt(maximumSpeed);
   }
 
-  public int getBatteryCapacity() {
+  public int getBatteryCapacity() throws IOException {
     System.out.println("Enter battery capacity(in mAh):");
     String batteryCapacity;
-    while (!isNumeric(batteryCapacity = scan.nextLine())) {
+    if (!isPositiveNumber(batteryCapacity = reader.readLine())) {
       this.getBatteryCapacity();
     }
     return Integer.parseInt(batteryCapacity);
@@ -102,11 +102,23 @@ public class UserInputs {
     }
   }
 
-  private boolean isNumeric(String str) {
+//  private int getNumber() throws InvalidUserInput {
+//    String input = null;
+//    int number;
+//    try {
+//      input = reader.readLine();
+//      number = Integer.parseInt(input);
+//    } catch (Exception e) {
+//      throw new InvalidUserInput("Wrong input", input, e);
+//    }
+//    return number;
+//  }
+
+  private boolean isPositiveNumber(String str) {
     if (str.matches("([0-9]+)")) {
       return true;
     } else {
-      System.out.println("Not valid data. Enter the number");
+      System.out.println("Not valid data. Enter the positive number");
       return false;
     }
   }
