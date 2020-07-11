@@ -25,21 +25,13 @@ public class UserInputs {
   }
 
   public int getWeight() throws IOException {
-    System.out.println("Enter weight(in grams):");
-    String weight;
-    if (!isPositiveNumber(weight = reader.readLine())) {
-      this.getWeight();
-    }
-    return Integer.parseInt(weight);
+    String consoleTitle = "Enter weight(in grams):";
+    return getPositiveNumber(consoleTitle);
   }
 
   public boolean getAvailabilityLights() throws IOException {
-    System.out.println("Enter availability lights(TRUE/FALSE):");
-    String availabilityLights = reader.readLine();
-    if (!isBooleanType(availabilityLights)) {
-      this.getAvailabilityLights();
-    }
-    return Boolean.parseBoolean(availabilityLights);
+    String consoleTitle = "Enter availability lights(TRUE/FALSE):";
+    return getBooleanType(consoleTitle);
   }
 
   public String getColor() throws IOException {
@@ -48,78 +40,53 @@ public class UserInputs {
   }
 
   public int getPrice() throws IOException {
-    System.out.println("Enter price:");
-    String price;
-    if (!isPositiveNumber(price = reader.readLine())) {
-      this.getPrice();
-    }
-    return Integer.parseInt(price);
+    String consoleTitle = "Enter price:";
+    return getPositiveNumber(consoleTitle);
   }
 
   public int getSizeOfWheels() throws IOException {
-    System.out.println("Enter the size of wheels(in inch):");
-    String sizeOfWheels;
-    if (!isPositiveNumber(sizeOfWheels = reader.readLine())) {
-      this.getSizeOfWheels();
-    }
-    return Integer.parseInt(sizeOfWheels);
+    String consoleTitle = "Enter the size of wheels(in inch):";
+    return getPositiveNumber(consoleTitle);
   }
 
   public int getNumberOfGears() throws IOException {
-    System.out.println("Enter the number of  gears:");
-    String numberOfGears;
-    if (!isPositiveNumber(numberOfGears = reader.readLine())) {
-      this.getNumberOfGears();
-    }
-    return Integer.parseInt(numberOfGears);
+    String consoleTitle = "Enter the number of  gears:";
+    return getPositiveNumber(consoleTitle);
   }
 
   public int getMaximumSpeed() throws IOException {
-    System.out.println("Enter maximum speed(in km/h):");
-    String maximumSpeed;
-    if (!isPositiveNumber(maximumSpeed = reader.readLine())) {
-      this.getMaximumSpeed();
-    }
-    return Integer.parseInt(maximumSpeed);
+    String consoleTitle = "Enter maximum speed(in km/h):";
+    return getPositiveNumber(consoleTitle);
   }
 
   public int getBatteryCapacity() throws IOException {
-    System.out.println("Enter battery capacity(in mAh):");
-    String batteryCapacity;
-    if (!isPositiveNumber(batteryCapacity = reader.readLine())) {
-      this.getBatteryCapacity();
-    }
-    return Integer.parseInt(batteryCapacity);
+    String consoleTitle = "Enter battery capacity(in mAh):";
+    return getPositiveNumber(consoleTitle);
   }
 
-  // validators
-  private boolean isBooleanType(String str) {
-    if (str.toLowerCase().equals("true") || str.toLowerCase().equals("false")) {
-      return true;
-    } else {
-      System.out.println("Not valid data. Enter TRUE or FALSE");
-      return false;
+  private boolean getBooleanType(String consoleTitle) throws IOException {
+    String input;
+    while (true){
+      System.out.println(consoleTitle);
+      input = reader.readLine();
+      if (input.toLowerCase().equals("true") || input.toLowerCase().equals("false")){
+        return Boolean.parseBoolean(input);
+      } else {
+        System.out.printf("Not valid data: %s. Enter TRUE or FALSE\n", input);
+      }
     }
   }
 
-//  private int getNumber() throws InvalidUserInput {
-//    String input = null;
-//    int number;
-//    try {
-//      input = reader.readLine();
-//      number = Integer.parseInt(input);
-//    } catch (Exception e) {
-//      throw new InvalidUserInput("Wrong input", input, e);
-//    }
-//    return number;
-//  }
-
-  private boolean isPositiveNumber(String str) {
-    if (str.matches("([0-9]+)")) {
-      return true;
-    } else {
-      System.out.println("Not valid data. Enter the positive number");
-      return false;
+  private int getPositiveNumber(String consoleTitle) throws IOException {
+    String input;
+    while (true){
+      System.out.println(consoleTitle);
+      input = reader.readLine();
+      if(input.matches("([0-9]+)")){
+        return Integer.parseInt(input);
+      } else {
+        System.out.printf("Not valid data: %s. Enter the positive number\n", input);
+      }
     }
   }
 }
