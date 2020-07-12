@@ -1,6 +1,9 @@
 package controller;
 
 import dao.Identifiable;
+import model.EBike;
+import model.FoldingBike;
+import model.Speedelec;
 import view.UserInputs;
 
 import java.util.List;
@@ -13,20 +16,20 @@ public class ConsoleController {
     return bikeController.getAllBikes();
   }
 
-  public void addFoldingBike() {
-
+  public boolean addFoldingBike(FoldingBike foldingBike) {
+    return bikeController.addFoldingBike(foldingBike);
   }
 
-  public void addSpeedelec() {
-
+  public boolean addSpeedelec(Speedelec speedelec) {
+    return bikeController.addSpeedelec(speedelec);
   }
 
-  public void addEBike() {
-
+  public boolean addEBike(EBike eBike) {
+    return bikeController.addEBike(eBike);
   }
 
-  public void searchBike() {
-
+  public List<Identifiable> searchBikes(Identifiable identifiable) {
+    return bikeController.searchBikes(identifiable);
   }
 
   public void saveData() {

@@ -5,13 +5,29 @@ import dao.Identifiable;
 import java.util.Objects;
 
 public class Bike implements Identifiable{
-  private final int bikeId;
-  private final TypeOfBike typeOfBike;
-  private final String brand;
-  private final int weight;
-  private final boolean availabilityLights;
-  private final String color;
-  private final int price;
+  private int bikeId;
+  private TypeOfBike typeOfBike;
+  private String brand;
+  private int weight;
+  private boolean availabilityLights;
+  private String color;
+  private int price;
+
+  public Bike(){
+
+  }
+
+  public Bike(String brand,
+              int weight,
+              boolean availabilityLights,
+              String color,
+              int price) {
+    this.brand = brand;
+    this.weight = weight;
+    this.availabilityLights = availabilityLights;
+    this.color = color;
+    this.price = price;
+  }
 
   public Bike(int bikeId,
               TypeOfBike typeOfBike,
@@ -58,23 +74,61 @@ public class Bike implements Identifiable{
     return price;
   }
 
+  public void setBikeId(int bikeId) {
+    this.bikeId = bikeId;
+  }
+
+  public void setTypeOfBike(TypeOfBike typeOfBike) {
+    this.typeOfBike = typeOfBike;
+  }
+
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+  public void setWeight(int weight) {
+    this.weight = weight;
+  }
+
+  public void setAvailabilityLights(boolean availabilityLights) {
+    this.availabilityLights = availabilityLights;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Bike bike = (Bike) o;
-    return bikeId == bike.bikeId &&
-            weight == bike.weight &&
-            availabilityLights == bike.availabilityLights &&
-            price == bike.price &&
-            typeOfBike == bike.typeOfBike &&
-            Objects.equals(brand, bike.brand) &&
-            Objects.equals(color, bike.color);
+    return weight == bike.getWeight() &&
+            availabilityLights == bike.isAvailabilityLights() &&
+            price == bike.getPrice() &&
+            Objects.equals(brand, bike.getBrand()) &&
+            Objects.equals(color, bike.getColor());
   }
 
   @Override
   public int hashCode() {
+    return Objects.hash(brand, weight, availabilityLights, color, price);
+  }
 
-    return Objects.hash(bikeId, typeOfBike, brand, weight, availabilityLights, color, price);
+  @Override
+  public String toString() {
+    return "Bike{" +
+            "bikeId=" + bikeId +
+            ", typeOfBike=" + typeOfBike +
+            ", brand='" + brand + '\'' +
+            ", weight=" + weight +
+            ", availabilityLights=" + availabilityLights +
+            ", color='" + color + '\'' +
+            ", price=" + price +
+            '}';
   }
 }

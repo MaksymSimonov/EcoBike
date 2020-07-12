@@ -31,6 +31,11 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     return new ArrayList<>(map.values());
   }
 
+  public Map<Integer, Identifiable> getAllWithId() {
+    return map;
+  }
+
+
   public boolean insert(Identifiable bike) {
     if (bike == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
     int id = bike.getId();
@@ -98,7 +103,6 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     availabilityLights = Boolean.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-
     return new FoldingBike(bikeId, TypeOfBike.FOLDINGBIKE, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
   }
 
@@ -177,7 +181,6 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     try {
       OutputStream outputStream = new FileOutputStream(file);
       String line = null;
-
       for(Map.Entry<Integer, Identifiable> item : map.entrySet()){
         Bike bike = (Bike)item.getValue();
         switch (bike.getTypeOfBike()) {
@@ -196,13 +199,9 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
             line = convertEBikeToStr(eBike);
             break;
           }
-          default: {
-
-          }
         }
         outputStream.write(line.getBytes(), 0, line.length());
       }
-
       outputStream.close();
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("ecobike.txt file not found");
