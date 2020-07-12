@@ -52,20 +52,14 @@ public class FoldingBike extends Bike {
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
     FoldingBike foldingBike = (FoldingBike) o;
-    return this.getId() == foldingBike.getId() &&
-            this.getWeight() == foldingBike.getWeight() &&
-            this.isAvailabilityLights() == foldingBike.isAvailabilityLights() &&
-            this.getPrice() == foldingBike.getPrice() &&
-            Objects.equals(this.getTypeOfBike(), foldingBike.getTypeOfBike()) &&
-            Objects.equals(this.getBrand(), foldingBike.getBrand()) &&
-            Objects.equals(this.getColor(), foldingBike.getColor()) &&
-            sizeOfWheels == foldingBike.sizeOfWheels &&
-            numberOfGears == foldingBike.numberOfGears;
+    return sizeOfWheels == foldingBike.getSizeOfWheels() &&
+            numberOfGears == foldingBike.getNumberOfGears() &&
+            typeOfBike == foldingBike.getTypeOfBike();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), sizeOfWheels, numberOfGears);
+    return Objects.hash(super.hashCode(), typeOfBike, sizeOfWheels, numberOfGears);
   }
 
   @Override
@@ -74,6 +68,7 @@ public class FoldingBike extends Bike {
             "typeOfBike=" + typeOfBike +
             ", sizeOfWheels=" + sizeOfWheels +
             ", numberOfGears=" + numberOfGears +
+            ", availabilityLights=" + super.isAvailabilityLights() +
             ", getBrand=" + super.getBrand() +
             ", getColor=" + super.getColor() +
             ", getId=" + super.getId() +

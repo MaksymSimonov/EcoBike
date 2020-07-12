@@ -1,8 +1,14 @@
 package view;
 
+import model.TypeOfBike;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import static model.TypeOfBike.EBIKE;
+import static model.TypeOfBike.FOLDINGBIKE;
+import static model.TypeOfBike.SPEEDELEC;
 
 public class UserInputs {
   private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -17,6 +23,21 @@ public class UserInputs {
       throw new InvalidUserInput("Wrong input", input, e);
     }
     return number;
+  }
+
+  public TypeOfBike getTypeOfBikeForSearch() throws IOException {
+    String consoleTitle = "Enter type of bike for search:\n" +
+            "1 - Folding bike\n" +
+            "2 - Speedelec\n" +
+            "3 - E-bike";
+    while (true){
+      switch (getPositiveNumber(consoleTitle)){
+        case 1: return FOLDINGBIKE;
+        case 2: return SPEEDELEC;
+        case 3: return EBIKE;
+        default: System.out.println("Please select from the list");
+      }
+    }
   }
 
   public String getBrand() throws IOException {
@@ -85,7 +106,7 @@ public class UserInputs {
       if(input.matches("([0-9]+)")){
         return Integer.parseInt(input);
       } else {
-        System.out.printf("Not valid data: %s. Enter the positive number\n", input);
+        System.out.printf("Not valid data: %s. Enter the correct data\n", input);
       }
     }
   }

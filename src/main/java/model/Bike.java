@@ -107,19 +107,16 @@ public class Bike implements Identifiable{
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Bike bike = (Bike) o;
-    return bikeId == bike.bikeId &&
-            weight == bike.weight &&
-            availabilityLights == bike.availabilityLights &&
-            price == bike.price &&
-            typeOfBike == bike.typeOfBike &&
-            Objects.equals(brand, bike.brand) &&
-            Objects.equals(color, bike.color);
+    return weight == bike.getWeight() &&
+            availabilityLights == bike.isAvailabilityLights() &&
+            price == bike.getPrice() &&
+            Objects.equals(brand, bike.getBrand()) &&
+            Objects.equals(color, bike.getColor());
   }
 
   @Override
   public int hashCode() {
-
-    return Objects.hash(bikeId, typeOfBike, brand, weight, availabilityLights, color, price);
+    return Objects.hash(brand, weight, availabilityLights, color, price);
   }
 
   @Override

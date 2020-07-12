@@ -52,20 +52,14 @@ public class Speedelec extends Bike {
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
     Speedelec speedelec = (Speedelec) o;
-    return this.getId() == speedelec.getId() &&
-            this.getWeight() == speedelec.getWeight() &&
-            this.isAvailabilityLights() == speedelec.isAvailabilityLights() &&
-            this.getPrice() == speedelec.getPrice() &&
-            Objects.equals(this.getTypeOfBike(), speedelec.getTypeOfBike()) &&
-            Objects.equals(this.getBrand(), speedelec.getBrand()) &&
-            Objects.equals(this.getColor(), speedelec.getColor()) &&
-            maximumSpeed == speedelec.maximumSpeed &&
-            batteryCapacity == speedelec.batteryCapacity;
+    return typeOfBike == speedelec.getTypeOfBike() &&
+            maximumSpeed == speedelec.getMaximumSpeed() &&
+            batteryCapacity == speedelec.getBatteryCapacity();
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(super.hashCode(), maximumSpeed, batteryCapacity);
+    return Objects.hash(super.hashCode(), typeOfBike, maximumSpeed, batteryCapacity);
   }
 }

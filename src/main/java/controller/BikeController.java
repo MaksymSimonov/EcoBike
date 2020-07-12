@@ -36,8 +36,8 @@ public class BikeController {
     return service.addEBike(eBike);
   }
 
-  public List<Identifiable> searchBike() {
-    return service.searchBike();
+  public List<Identifiable> searchBikes(Identifiable identifiable) {
+    return service.searchBikes(identifiable);
   }
 
   public void saveData() {

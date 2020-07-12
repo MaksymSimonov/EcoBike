@@ -3,10 +3,7 @@ package view;
 import controller.ConsoleController;
 import dao.Identifiable;
 import logger.Logger;
-import model.Bike;
-import model.EBike;
-import model.FoldingBike;
-import model.Speedelec;
+import model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,7 +63,7 @@ public class ConsoleView {
           //logger.add("Add a new e-bike");
           break;
         case 5:
-          consoleController.searchBike();
+          showBikes(bikeDataReaderForSearch());
           //logger.add("Find the first item of a particular brand");
           break;
         case 6:
@@ -175,6 +172,30 @@ public class ConsoleView {
     } else {
       System.out.println("--------Something was wrong. Try again--------\n");
     }
+  }
+
+  private List<Identifiable> bikeDataReaderForSearch() throws IOException {
+    System.out.println("-------------Enter data to search---------------");
+    Identifiable identifiable;
+    TypeOfBike typeOfBike = userInputs.getTypeOfBikeForSearch();
+    switch (typeOfBike) {
+      case FOLDINGBIKE: {
+        identifiable = bikeDataReader(new FoldingBike());
+        break;
+      }
+      case SPEEDELEC: {
+        identifiable = bikeDataReader(new Speedelec());
+        break;
+      }
+      case EBIKE: {
+        identifiable = bikeDataReader(new EBike());
+        break;
+      }
+      default: {
+        identifiable = bikeDataReader(new Bike());
+      }
+    }
+    return consoleController.searchBikes(identifiable);
   }
 
   private Identifiable bikeDataReader(Identifiable identifiable) throws IOException {

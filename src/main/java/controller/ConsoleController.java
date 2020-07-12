@@ -28,8 +28,8 @@ public class ConsoleController {
     return bikeController.addEBike(eBike);
   }
 
-  public void searchBike() {
-
+  public List<Identifiable> searchBikes(Identifiable identifiable) {
+    return bikeController.searchBikes(identifiable);
   }
 
   public void saveData() {

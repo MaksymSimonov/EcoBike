@@ -52,21 +52,15 @@ public class EBike extends Bike {
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
     EBike eBike = (EBike) o;
-    return this.getId() == eBike.getId() &&
-            this.getWeight() == eBike.getWeight() &&
-            this.isAvailabilityLights() == eBike.isAvailabilityLights() &&
-            this.getPrice() == eBike.getPrice() &&
-            Objects.equals(this.getTypeOfBike(), eBike.getTypeOfBike()) &&
-            Objects.equals(this.getBrand(), eBike.getBrand()) &&
-            Objects.equals(this.getColor(), eBike.getColor()) &&
-            maximumSpeed == eBike.maximumSpeed &&
-            batteryCapacity == eBike.batteryCapacity;
+    return typeOfBike == eBike.getTypeOfBike() &&
+            maximumSpeed == eBike.getMaximumSpeed() &&
+            batteryCapacity == eBike.getBatteryCapacity();
   }
 
   @Override
   public int hashCode() {
 
-    return Objects.hash(super.hashCode(), maximumSpeed, batteryCapacity);
+    return Objects.hash(super.hashCode(), typeOfBike, maximumSpeed, batteryCapacity);
   }
 
 
