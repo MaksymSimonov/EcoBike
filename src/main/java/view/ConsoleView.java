@@ -8,6 +8,7 @@ import model.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -81,7 +82,6 @@ public class ConsoleView {
           System.out.println("Try to enter menu item again(from 1 to 7)");
       }
     } catch (Exception e) {
-      System.out.println("menuItemReader");
       System.out.println(e.getMessage());
       if (e.getCause() != null) {
         System.out.println("Original exception " + e.getCause().getMessage());
@@ -176,26 +176,47 @@ public class ConsoleView {
 
   private List<Identifiable> bikeDataReaderForSearch() throws IOException {
     System.out.println("-------------Enter data to search---------------");
-    Identifiable identifiable;
     TypeOfBike typeOfBike = userInputs.getTypeOfBikeForSearch();
-    switch (typeOfBike) {
-      case FOLDINGBIKE: {
-        identifiable = bikeDataReader(new FoldingBike());
-        break;
-      }
-      case SPEEDELEC: {
-        identifiable = bikeDataReader(new Speedelec());
-        break;
-      }
-      case EBIKE: {
-        identifiable = bikeDataReader(new EBike());
-        break;
-      }
-      default: {
-        identifiable = bikeDataReader(new Bike());
+    String brand = userInputs.getBrandForSearch();
+    Integer weight = userInputs.getWeightForSearch();
+    Boolean availabilityLights = userInputs.getAvailabilityLightsForSearch();
+    String color = userInputs.getColorForSearch();
+    Integer price = userInputs.getPriceForSearch();
+    Integer sizeOfWheels = null;
+    Integer numberOfGears = null;
+    Integer maximumSpeed = null;
+    Integer batteryCapacity = null;
+    if(typeOfBike != null){
+      switch (typeOfBike) {
+        case FOLDINGBIKE: {
+          sizeOfWheels = userInputs.getSizeOfWheelsForSearch();
+          numberOfGears = userInputs.getNumberOfGearsForSearch();
+          break;
+        }
+        case SPEEDELEC: {
+          maximumSpeed = userInputs.getMaximumSpeedForSearch();
+          batteryCapacity = userInputs.getBatteryCapacityForSearch();
+          break;
+        }
+        case EBIKE: {
+          maximumSpeed = userInputs.getMaximumSpeedForSearch();
+          batteryCapacity = userInputs.getBatteryCapacityForSearch();
+          break;
+        }
       }
     }
-    return consoleController.searchBikes(identifiable);
+
+    return consoleController
+            .searchBikes(typeOfBike,
+                    brand,
+                    weight,
+                    availabilityLights,
+                    color,
+                    price,
+                    sizeOfWheels,
+                    numberOfGears,
+                    maximumSpeed,
+                    batteryCapacity);
   }
 
   private Identifiable bikeDataReader(Identifiable identifiable) throws IOException {

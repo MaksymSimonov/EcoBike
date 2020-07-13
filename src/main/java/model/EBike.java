@@ -63,5 +63,18 @@ public class EBike extends Bike {
     return Objects.hash(super.hashCode(), typeOfBike, maximumSpeed, batteryCapacity);
   }
 
-
+  @Override
+  public String toString() {
+    return "EBike{" +
+            "typeOfBike=" + typeOfBike +
+            ", maximumSpeed=" + maximumSpeed +
+            ", batteryCapacity=" + batteryCapacity +
+            ", availabilityLights=" + super.isAvailabilityLights() +
+            ", getBrand=" + super.getBrand() +
+            ", getColor=" + super.getColor() +
+            ", getId=" + super.getId() +
+            ", getPrice=" + super.getPrice() +
+            ", getWeight=" + super. getWeight()+
+            '}';
+  }
 }

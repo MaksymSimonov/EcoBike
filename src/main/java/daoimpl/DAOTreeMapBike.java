@@ -31,11 +31,6 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     return new ArrayList<>(map.values());
   }
 
-  public Map<Integer, Identifiable> getAllWithId() {
-    return map;
-  }
-
-
   public boolean insert(Identifiable bike) {
     if (bike == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
     int id = bike.getId();
@@ -84,10 +79,9 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
-  private FoldingBike retrieveFoldingBikeData(int countOfBikes, String dataLine){
-    int bikeId = countOfBikes;
-    String brand;
+  private FoldingBike retrieveFoldingBikeData(int bikeId, String dataLine){
     TypeOfBike typeOfBike = TypeOfBike.FOLDINGBIKE;
+    String brand;
     int sizeOfWheels;
     int numberOfGears;
     int weight;
@@ -103,11 +97,10 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     availabilityLights = Boolean.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new FoldingBike(bikeId, TypeOfBike.FOLDINGBIKE, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
+    return new FoldingBike(bikeId, typeOfBike, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
   }
 
-  private Speedelec retrieveSpeedelecData(int countOfBikes, String dataLine){
-    int bikeId = countOfBikes;
+  private Speedelec retrieveSpeedelecData(int bikeId, String dataLine){
     TypeOfBike typeOfBike = TypeOfBike.SPEEDELEC;
     String brand;
     int maximumSpeed;
@@ -128,8 +121,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     return new Speedelec(bikeId, typeOfBike, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
-  private EBike retrieveEBikeData(int countOfBikes, String dataLine){
-    int bikeId = countOfBikes;
+  private EBike retrieveEBikeData(int bikeId, String dataLine){
     TypeOfBike typeOfBike = TypeOfBike.EBIKE;
     String brand;
     int maximumSpeed;

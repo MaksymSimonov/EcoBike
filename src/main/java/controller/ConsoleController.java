@@ -4,6 +4,7 @@ import dao.Identifiable;
 import model.EBike;
 import model.FoldingBike;
 import model.Speedelec;
+import model.TypeOfBike;
 import view.UserInputs;
 
 import java.util.List;
@@ -28,8 +29,27 @@ public class ConsoleController {
     return bikeController.addEBike(eBike);
   }
 
-  public List<Identifiable> searchBikes(Identifiable identifiable) {
-    return bikeController.searchBikes(identifiable);
+  public List<Identifiable> searchBikes(TypeOfBike typeOfBike,
+                                        String brand,
+                                        Integer weight,
+                                        Boolean availabilityLights,
+                                        String color,
+                                        Integer price,
+                                        Integer sizeOfWheels,
+                                        Integer numberOfGears,
+                                        Integer maximumSpeed,
+                                        Integer batteryCapacity) {
+    return bikeController
+            .searchBikes(typeOfBike,
+                    brand,
+                    weight,
+                    availabilityLights,
+                    color,
+                    price,
+                    sizeOfWheels,
+                    numberOfGears,
+                    maximumSpeed,
+                    batteryCapacity);
   }
 
   public void saveData() {
