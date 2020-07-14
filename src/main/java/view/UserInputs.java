@@ -1,14 +1,14 @@
 package view;
 
-import model.TypeOfBike;
+import entities.TypeOfBike;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static model.TypeOfBike.EBIKE;
-import static model.TypeOfBike.FOLDINGBIKE;
-import static model.TypeOfBike.SPEEDELEC;
+import static entities.TypeOfBike.EBIKE;
+import static entities.TypeOfBike.FOLDINGBIKE;
+import static entities.TypeOfBike.SPEEDELEC;
 
 public class UserInputs {
   private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

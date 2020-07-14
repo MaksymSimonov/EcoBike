@@ -1,13 +1,12 @@
 package controller;
 
 import dao.Identifiable;
-import model.EBike;
-import model.FoldingBike;
-import model.Speedelec;
-import model.TypeOfBike;
+import entities.EBike;
+import entities.FoldingBike;
+import entities.Speedelec;
+import entities.TypeOfBike;
 import service.BikeService;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 
 public class BikeController {

@@ -2,14 +2,11 @@ package service;
 
 import dao.Identifiable;
 import daoimpl.DAOTreeMapBike;
-import model.*;
+import entities.*;
 
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static model.TypeOfBike.FOLDINGBIKE;
 
 public class BikeService {
   private final DAOTreeMapBike data;
