@@ -5,13 +5,11 @@ import entities.EBike;
 import entities.FoldingBike;
 import entities.Speedelec;
 import entities.TypeOfBike;
-import view.UserInputs;
 
 import java.util.List;
 
 public class ConsoleController {
   private BikeController bikeController = new BikeController();
-  private UserInputs userInputs = new UserInputs();
 
   public List<Identifiable> getAllBikes() {
     return bikeController.getAllBikes();

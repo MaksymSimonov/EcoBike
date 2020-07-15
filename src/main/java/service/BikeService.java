@@ -22,19 +22,19 @@ public class BikeService {
 
   public boolean addFoldingBike(FoldingBike foldingBike) {
     int bikeId = getAllBikes().size() + 1;
-    foldingBike.setBikeId(bikeId);
+    if (foldingBike != null) foldingBike.setBikeId(bikeId);
     return data.insert(foldingBike);
   }
 
   public boolean addSpeedelec(Speedelec speedelec) {
     int bikeId = getAllBikes().size() + 1;
-    speedelec.setBikeId(bikeId);
+    if (speedelec != null) speedelec.setBikeId(bikeId);
     return data.insert(speedelec);
   }
 
   public boolean addEBike(EBike eBike) {
     int bikeId = getAllBikes().size() + 1;
-    eBike.setBikeId(bikeId);
+    if (eBike != null) eBike.setBikeId(bikeId);
     return data.insert(eBike);
   }
 
@@ -97,6 +97,6 @@ public class BikeService {
   }
 
   public void saveData() {
-    data.saveData();
+    data.save();
   }
 }

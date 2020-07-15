@@ -26,8 +26,8 @@ public class UserInputs {
   }
 
   public String getBrand() throws IOException {
-    System.out.println("Enter brand name:");
-    return reader.readLine();
+    String consoleTitle = "Enter brand name:";
+    return getInputString(consoleTitle);
   }
 
   public int getWeight() throws IOException {
@@ -41,8 +41,8 @@ public class UserInputs {
   }
 
   public String getColor() throws IOException {
-    System.out.println("Enter color:");
-    return reader.readLine();
+    String consoleTitle = "Enter color:";
+    return getInputString(consoleTitle);
   }
 
   public int getPrice() throws IOException {
@@ -144,9 +144,9 @@ public class UserInputs {
     while (true){
       System.out.println(consoleTitle);
       input = reader.readLine();
-      if(input.equals("")) return null;
+      if (input.equals("")) return null;
       else {
-        if(input.matches("([0-9]+)")){
+        if (input.matches("([0-9]+)")){
           return Integer.parseInt(input);
         } else {
           System.out.printf("Not valid data: %s. Enter the correct data\n", input);
@@ -160,7 +160,7 @@ public class UserInputs {
     while (true){
       System.out.println(consoleTitle);
       input = reader.readLine();
-      if(input.equals("")) return null;
+      if (input.equals("")) return null;
       if (input.toLowerCase().equals("true") || input.toLowerCase().equals("false")){
         return Boolean.parseBoolean(input);
       } else {
@@ -187,8 +187,21 @@ public class UserInputs {
     while (true){
       System.out.println(consoleTitle);
       input = reader.readLine();
-      if(input.matches("([0-9]+)")){
+      if (input.matches("([0-9]+)")){
         return Integer.parseInt(input);
+      } else {
+        System.out.printf("Not valid data: %s. Enter the correct data\n", input);
+      }
+    }
+  }
+
+  private String getInputString(String consoleTitle) throws IOException {
+    String input;
+    while (true){
+      System.out.println(consoleTitle);
+      input = reader.readLine();
+      if (input.matches("^[a-zA-Z0-9]+(?:[\\s-][a-zA-Z0-9]+)*$") && input.length() > 1){
+        return input;
       } else {
         System.out.printf("Not valid data: %s. Enter the correct data\n", input);
       }

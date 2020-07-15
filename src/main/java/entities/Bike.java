@@ -78,10 +78,6 @@ public class Bike implements Identifiable{
     this.bikeId = bikeId;
   }
 
-  public void setTypeOfBike(TypeOfBike typeOfBike) {
-    this.typeOfBike = typeOfBike;
-  }
-
   public void setBrand(String brand) {
     this.brand = brand;
   }
@@ -122,8 +118,7 @@ public class Bike implements Identifiable{
   @Override
   public String toString() {
     return "Bike{" +
-            "bikeId=" + bikeId +
-            ", typeOfBike=" + typeOfBike +
+            ", bikeId=" + bikeId +
             ", brand='" + brand + '\'' +
             ", weight=" + weight +
             ", availabilityLights=" + availabilityLights +

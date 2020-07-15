@@ -12,11 +12,11 @@ import java.util.List;
 public class BikeController {
   private final BikeService service;
 
-  public BikeController() {
+  BikeController() {
     this(new File("./data", "ecobike.txt"));
   }
 
-  public BikeController(File file) {
+  BikeController(File file) {
     service = new BikeService(file);
   }
 

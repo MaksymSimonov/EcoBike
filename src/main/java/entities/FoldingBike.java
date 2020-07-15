@@ -12,7 +12,6 @@ public class FoldingBike extends Bike {
   }
 
   public FoldingBike(int bikeId,
-                     TypeOfBike typeOfBike,
                      String brand,
                      int sizeOfWheels,
                      int numberOfGears,
@@ -20,7 +19,7 @@ public class FoldingBike extends Bike {
                      boolean availabilityLights,
                      String color,
                      int price) {
-    super(bikeId, typeOfBike,  brand, weight, availabilityLights, color, price);
+    super(bikeId, TypeOfBike.FOLDINGBIKE,  brand, weight, availabilityLights, color, price);
     this.sizeOfWheels = sizeOfWheels;
     this.numberOfGears = numberOfGears;
   }
@@ -65,15 +64,15 @@ public class FoldingBike extends Bike {
   @Override
   public String toString() {
     return "FoldingBike{" +
-            "typeOfBike=" + typeOfBike +
+            ", bikeId=" + super.getId() +
+            ", typeOfBike='" + typeOfBike.getFullNameOfType() + '\'' +
+            ", brand='" + super.getBrand() + '\'' +
             ", sizeOfWheels=" + sizeOfWheels +
             ", numberOfGears=" + numberOfGears +
+            ", weight=" + super.getWeight() +
             ", availabilityLights=" + super.isAvailabilityLights() +
-            ", getBrand=" + super.getBrand() +
-            ", getColor=" + super.getColor() +
-            ", getId=" + super.getId() +
-            ", getPrice=" + super.getPrice() +
-            ", getWeight=" + super. getWeight()+
+            ", color='" + super.getColor() + '\'' +
+            ", price=" + super.getPrice() +
             '}';
   }
 }

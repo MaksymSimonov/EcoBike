@@ -8,5 +8,5 @@ public interface DAOFactory<T> {
   boolean insert(T item);
   boolean update(T item);
   boolean remove(T item);
-  void saveData();
+  void save();
 }

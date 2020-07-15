@@ -12,7 +12,6 @@ public class EBike extends Bike {
   }
 
   public EBike(int bikeId,
-               TypeOfBike typeOfBike,
                String brand,
                int maximumSpeed,
                int weight,
@@ -20,7 +19,7 @@ public class EBike extends Bike {
                int batteryCapacity,
                String color,
                int price) {
-    super(bikeId, typeOfBike, brand, weight, availabilityLights, color, price);
+    super(bikeId, TypeOfBike.EBIKE, brand, weight, availabilityLights, color, price);
     this.maximumSpeed = maximumSpeed;
     this.batteryCapacity = batteryCapacity;
   }
@@ -59,22 +58,21 @@ public class EBike extends Bike {
 
   @Override
   public int hashCode() {
-
     return Objects.hash(super.hashCode(), typeOfBike, maximumSpeed, batteryCapacity);
   }
 
   @Override
   public String toString() {
     return "EBike{" +
-            "typeOfBike=" + typeOfBike +
+            ", bikeId=" + super.getId() +
+            ", typeOfBike='" + typeOfBike.getFullNameOfType() + '\'' +
+            ", brand='" + super.getBrand() + '\'' +
             ", maximumSpeed=" + maximumSpeed +
-            ", batteryCapacity=" + batteryCapacity +
+            ", weight=" + super.getWeight() +
             ", availabilityLights=" + super.isAvailabilityLights() +
-            ", getBrand=" + super.getBrand() +
-            ", getColor=" + super.getColor() +
-            ", getId=" + super.getId() +
-            ", getPrice=" + super.getPrice() +
-            ", getWeight=" + super. getWeight()+
+            ", batteryCapacity=" + batteryCapacity +
+            ", color='" + super.getColor() + '\'' +
+            ", price=" + super.getPrice() +
             '}';
   }
 }

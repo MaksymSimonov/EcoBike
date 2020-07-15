@@ -50,9 +50,8 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
-  public Identifiable remove(String id) {
-    if (id == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
-    try{
+  public Identifiable remove(int id) {
+    try {
       Identifiable bike = null;
       if (map.containsKey(id)) {
         bike = map.get(id);
@@ -94,7 +93,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     availabilityLights = Boolean.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new FoldingBike(bikeId, typeOfBike, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
+    return new FoldingBike(bikeId, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
   }
 
   private Speedelec retrieveSpeedelecData(int bikeId, String dataLine){
@@ -115,7 +114,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     batteryCapacity = Integer.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new Speedelec(bikeId, typeOfBike, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
+    return new Speedelec(bikeId, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
   private EBike retrieveEBikeData(int bikeId, String dataLine){
@@ -136,7 +135,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     batteryCapacity = Integer.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new EBike(bikeId, typeOfBike, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
+    return new EBike(bikeId, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
   public void retrieveInitialData() {
@@ -166,7 +165,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
-  public void saveData() {
+  public void save() {
     try {
       OutputStream outputStream = new FileOutputStream(file);
       String line = null;
@@ -244,5 +243,4 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
             .append('\n');
     return stringBuffer.toString();
   }
-
 }
