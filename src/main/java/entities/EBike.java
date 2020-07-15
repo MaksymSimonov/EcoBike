@@ -1,4 +1,4 @@
-package model;
+package entities;
 
 import java.util.Objects;
 
@@ -11,16 +11,14 @@ public class EBike extends Bike {
 
   }
 
-  public EBike(int bikeId,
-               TypeOfBike typeOfBike,
-               String brand,
+  public EBike(String brand,
                int maximumSpeed,
                int weight,
                boolean availabilityLights,
                int batteryCapacity,
                String color,
                int price) {
-    super(bikeId, typeOfBike, brand, weight, availabilityLights, color, price);
+    super(TypeOfBike.EBIKE, brand, weight, availabilityLights, color, price);
     this.maximumSpeed = maximumSpeed;
     this.batteryCapacity = batteryCapacity;
   }
@@ -59,9 +57,21 @@ public class EBike extends Bike {
 
   @Override
   public int hashCode() {
-
     return Objects.hash(super.hashCode(), typeOfBike, maximumSpeed, batteryCapacity);
   }
 
-
+  @Override
+  public String toString() {
+    return "EBike{" +
+            ", bikeId=" + super.getId() +
+            ", typeOfBike='" + typeOfBike.getFullNameOfType() + '\'' +
+            ", brand='" + super.getBrand() + '\'' +
+            ", maximumSpeed=" + maximumSpeed +
+            ", weight=" + super.getWeight() +
+            ", availabilityLights=" + super.isAvailabilityLights() +
+            ", batteryCapacity=" + batteryCapacity +
+            ", color='" + super.getColor() + '\'' +
+            ", price=" + super.getPrice() +
+            '}';
+  }
 }

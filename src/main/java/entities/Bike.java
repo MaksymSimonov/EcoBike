@@ -1,4 +1,4 @@
-package model;
+package entities;
 
 import dao.Identifiable;
 
@@ -29,14 +29,12 @@ public class Bike implements Identifiable{
     this.price = price;
   }
 
-  public Bike(int bikeId,
-              TypeOfBike typeOfBike,
+  public Bike(TypeOfBike typeOfBike,
               String brand,
               int weight,
               boolean availabilityLights,
               String color,
               int price) {
-    this.bikeId = bikeId;
     this.typeOfBike =  typeOfBike;
     this.brand = brand;
     this.weight = weight;
@@ -74,12 +72,8 @@ public class Bike implements Identifiable{
     return price;
   }
 
-  public void setBikeId(int bikeId) {
+  public void setId(int bikeId) {
     this.bikeId = bikeId;
-  }
-
-  public void setTypeOfBike(TypeOfBike typeOfBike) {
-    this.typeOfBike = typeOfBike;
   }
 
   public void setBrand(String brand) {
@@ -122,8 +116,7 @@ public class Bike implements Identifiable{
   @Override
   public String toString() {
     return "Bike{" +
-            "bikeId=" + bikeId +
-            ", typeOfBike=" + typeOfBike +
+            ", bikeId=" + bikeId +
             ", brand='" + brand + '\'' +
             ", weight=" + weight +
             ", availabilityLights=" + availabilityLights +

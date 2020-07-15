@@ -1,16 +1,15 @@
 package controller;
 
 import dao.Identifiable;
-import model.EBike;
-import model.FoldingBike;
-import model.Speedelec;
-import view.UserInputs;
+import entities.EBike;
+import entities.FoldingBike;
+import entities.Speedelec;
+import entities.TypeOfBike;
 
 import java.util.List;
 
 public class ConsoleController {
   private BikeController bikeController = new BikeController();
-  private UserInputs userInputs = new UserInputs();
 
   public List<Identifiable> getAllBikes() {
     return bikeController.getAllBikes();
@@ -28,8 +27,27 @@ public class ConsoleController {
     return bikeController.addEBike(eBike);
   }
 
-  public List<Identifiable> searchBikes(Identifiable identifiable) {
-    return bikeController.searchBikes(identifiable);
+  public List<Identifiable> searchBikes(TypeOfBike typeOfBike,
+                                        String brand,
+                                        Integer weight,
+                                        Boolean availabilityLights,
+                                        String color,
+                                        Integer price,
+                                        Integer sizeOfWheels,
+                                        Integer numberOfGears,
+                                        Integer maximumSpeed,
+                                        Integer batteryCapacity) {
+    return bikeController
+            .searchBikes(typeOfBike,
+                    brand,
+                    weight,
+                    availabilityLights,
+                    color,
+                    price,
+                    sizeOfWheels,
+                    numberOfGears,
+                    maximumSpeed,
+                    batteryCapacity);
   }
 
   public void saveData() {

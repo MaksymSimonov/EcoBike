@@ -2,19 +2,15 @@ package view;
 
 import controller.ConsoleController;
 import dao.Identifiable;
-import logger.Logger;
-import model.*;
+import entities.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 
 public class ConsoleView {
   private ConsoleController consoleController = new ConsoleController();
   private UserInputs userInputs = new UserInputs();
-  private Logger logger = new Logger();
 
   public void startApp() {
     try {
@@ -48,28 +44,22 @@ public class ConsoleView {
       switch (userInputs.getMenuItem()) {
         case 1:
           showBikes(consoleController.getAllBikes());
-          //logger.add("Show the entire EcoBike catalog");
           break;
         case 2:
-          addingFoldingBike();
-          //logger.add("Add a new folding bike");
+          addFoldingBike();
           break;
         case 3:
-          addingSpeedelec();
-          //logger.add("Add a new speedelec");
+          addSpeedelec();
           break;
         case 4:
-          addingEBike();
-          //logger.add("Add a new e-bike");
+          addEBike();
           break;
         case 5:
           showBikes(bikeDataReaderForSearch());
-          //logger.add("Find the first item of a particular brand");
           break;
         case 6:
           consoleController.saveData();
           System.out.println("Save completed");
-          //logger.add("Write to file");
           break;
         case 7:
           consoleController.saveData();
@@ -81,7 +71,6 @@ public class ConsoleView {
           System.out.println("Try to enter menu item again(from 1 to 7)");
       }
     } catch (Exception e) {
-      System.out.println("menuItemReader");
       System.out.println(e.getMessage());
       if (e.getCause() != null) {
         System.out.println("Original exception " + e.getCause().getMessage());
@@ -141,7 +130,7 @@ public class ConsoleView {
     System.out.printf("Price: %d euros.\n", eBike.getPrice());
   }
 
-  private void addingFoldingBike() throws IOException {
+  private void addFoldingBike() throws IOException {
     FoldingBike foldingBike = new FoldingBike();
     System.out.println("-----------Adding a new folding bike-----------");
     boolean successfully = consoleController.addFoldingBike((FoldingBike) bikeDataReader(foldingBike));
@@ -152,7 +141,7 @@ public class ConsoleView {
     }
   }
 
-  private void addingSpeedelec() throws IOException {
+  private void addSpeedelec() throws IOException {
     Speedelec speedelec = new Speedelec();
     System.out.println("------------Adding a new speedelec-------------");
     boolean successfully = consoleController.addSpeedelec((Speedelec) bikeDataReader(speedelec));
@@ -163,7 +152,7 @@ public class ConsoleView {
     }
   }
 
-  private void addingEBike() throws IOException {
+  private void addEBike() throws IOException {
     EBike eBike = new EBike();
     System.out.println("-------------Adding a new e-bike---------------");
     boolean successfully = consoleController.addEBike((EBike) bikeDataReader(eBike));
@@ -176,26 +165,47 @@ public class ConsoleView {
 
   private List<Identifiable> bikeDataReaderForSearch() throws IOException {
     System.out.println("-------------Enter data to search---------------");
-    Identifiable identifiable;
     TypeOfBike typeOfBike = userInputs.getTypeOfBikeForSearch();
-    switch (typeOfBike) {
-      case FOLDINGBIKE: {
-        identifiable = bikeDataReader(new FoldingBike());
-        break;
-      }
-      case SPEEDELEC: {
-        identifiable = bikeDataReader(new Speedelec());
-        break;
-      }
-      case EBIKE: {
-        identifiable = bikeDataReader(new EBike());
-        break;
-      }
-      default: {
-        identifiable = bikeDataReader(new Bike());
+    String brand = userInputs.getBrandForSearch();
+    Integer weight = userInputs.getWeightForSearch();
+    Boolean availabilityLights = userInputs.getAvailabilityLightsForSearch();
+    String color = userInputs.getColorForSearch();
+    Integer price = userInputs.getPriceForSearch();
+    Integer sizeOfWheels = null;
+    Integer numberOfGears = null;
+    Integer maximumSpeed = null;
+    Integer batteryCapacity = null;
+    if(typeOfBike != null){
+      switch (typeOfBike) {
+        case FOLDINGBIKE: {
+          sizeOfWheels = userInputs.getSizeOfWheelsForSearch();
+          numberOfGears = userInputs.getNumberOfGearsForSearch();
+          break;
+        }
+        case SPEEDELEC: {
+          maximumSpeed = userInputs.getMaximumSpeedForSearch();
+          batteryCapacity = userInputs.getBatteryCapacityForSearch();
+          break;
+        }
+        case EBIKE: {
+          maximumSpeed = userInputs.getMaximumSpeedForSearch();
+          batteryCapacity = userInputs.getBatteryCapacityForSearch();
+          break;
+        }
       }
     }
-    return consoleController.searchBikes(identifiable);
+
+    return consoleController
+            .searchBikes(typeOfBike,
+                    brand,
+                    weight,
+                    availabilityLights,
+                    color,
+                    price,
+                    sizeOfWheels,
+                    numberOfGears,
+                    maximumSpeed,
+                    batteryCapacity);
   }
 
   private Identifiable bikeDataReader(Identifiable identifiable) throws IOException {
