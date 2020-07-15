@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class EBikeTest {
   private EBike eBike;
-  private final int bikeId = 1;
   private final TypeOfBike typeOfBike = TypeOfBike.EBIKE;
   private final String brand = "Benetti";
   private final int maximumSpeed = 16;
@@ -20,19 +19,13 @@ class EBikeTest {
 
   @BeforeEach
   void beforeEach() {
-    eBike = new EBike(bikeId,
-            brand,
+    eBike = new EBike(brand,
             maximumSpeed,
             weight,
             availabilityLights,
             batteryCapacity,
             color,
             price);
-  }
-
-  @Test
-  void getId() {
-    assertEquals(bikeId, eBike.getId());
   }
 
   @Test
@@ -111,8 +104,7 @@ class EBikeTest {
 
   @Test
   void equals() {
-    EBike newEBike = new EBike(2,
-            "Intertool",
+    EBike newEBike = new EBike("Intertool",
             21,
             16345,
             false,
@@ -120,8 +112,7 @@ class EBikeTest {
             "black",
             21999);
     EBike copyEBike = eBike;
-    EBike fullCopyEBike = new EBike(bikeId,
-            brand,
+    EBike fullCopyEBike = new EBike(brand,
             maximumSpeed,
             weight,
             availabilityLights,

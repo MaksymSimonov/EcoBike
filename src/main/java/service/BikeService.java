@@ -22,19 +22,19 @@ public class BikeService {
 
   public boolean addFoldingBike(FoldingBike foldingBike) {
     int bikeId = getAllBikes().size() + 1;
-    if (foldingBike != null) foldingBike.setBikeId(bikeId);
+    if (foldingBike != null) foldingBike.setId(bikeId);
     return data.insert(foldingBike);
   }
 
   public boolean addSpeedelec(Speedelec speedelec) {
     int bikeId = getAllBikes().size() + 1;
-    if (speedelec != null) speedelec.setBikeId(bikeId);
+    if (speedelec != null) speedelec.setId(bikeId);
     return data.insert(speedelec);
   }
 
   public boolean addEBike(EBike eBike) {
     int bikeId = getAllBikes().size() + 1;
-    if (eBike != null) eBike.setBikeId(bikeId);
+    if (eBike != null) eBike.setId(bikeId);
     return data.insert(eBike);
   }
 

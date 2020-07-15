@@ -30,11 +30,13 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
 
   public boolean insert(Identifiable bike) {
     if (bike == null) throw new IllegalArgumentException("Invalid insert arguments: null is not accepted");
-    int id = bike.getId();
-    if (map.containsKey(id)) {
-      return false;
+    int id = map.size() + 1;
+    if (map.containsValue(bike)) {
+      throw new IllegalArgumentException("Such bike already exists");
     } else {
-      map.put(id, bike);
+      Bike newBike = (Bike)bike;
+      newBike.setId(id);
+      map.put(id, newBike);
       return true;
     }
   }
@@ -75,7 +77,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
-  private FoldingBike retrieveFoldingBikeData(int bikeId, String dataLine){
+  private FoldingBike retrieveFoldingBikeData(String dataLine){
     TypeOfBike typeOfBike = TypeOfBike.FOLDINGBIKE;
     String brand;
     int sizeOfWheels;
@@ -93,10 +95,10 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     availabilityLights = Boolean.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new FoldingBike(bikeId, brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
+    return new FoldingBike(brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
   }
 
-  private Speedelec retrieveSpeedelecData(int bikeId, String dataLine){
+  private Speedelec retrieveSpeedelecData(String dataLine){
     TypeOfBike typeOfBike = TypeOfBike.SPEEDELEC;
     String brand;
     int maximumSpeed;
@@ -114,10 +116,10 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     batteryCapacity = Integer.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new Speedelec(bikeId, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
+    return new Speedelec(brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
-  private EBike retrieveEBikeData(int bikeId, String dataLine){
+  private EBike retrieveEBikeData(String dataLine){
     TypeOfBike typeOfBike = TypeOfBike.EBIKE;
     String brand;
     int maximumSpeed;
@@ -135,7 +137,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     batteryCapacity = Integer.valueOf(params[4]);
     color = params[5];
     price = Integer.valueOf(params[6]);
-    return new EBike(bikeId, brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
+    return new EBike(brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
   public void retrieveInitialData() {
@@ -143,19 +145,17 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
             new InputStreamReader(
                     new FileInputStream(file), StandardCharsets.UTF_8))){
       String line;
-      int countOfBikes = 1;
       while ((line = reader.readLine()) != null) {
         if(line.contains(TypeOfBike.FOLDINGBIKE.getFullNameOfType())){
-          FoldingBike foldingBike = retrieveFoldingBikeData(countOfBikes, line);
+          FoldingBike foldingBike = retrieveFoldingBikeData(line);
           insert(foldingBike);
         } else if(line.contains(TypeOfBike.SPEEDELEC.getFullNameOfType())) {
-          Speedelec speedelec = retrieveSpeedelecData(countOfBikes, line);
+          Speedelec speedelec = retrieveSpeedelecData(line);
           insert(speedelec);
         } else if(line.contains(TypeOfBike.EBIKE.getFullNameOfType())) {
-          EBike eBike = retrieveEBikeData(countOfBikes, line);
+          EBike eBike = retrieveEBikeData(line);
           insert(eBike);
         }
-        countOfBikes++;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("ecobike.txt file not found");

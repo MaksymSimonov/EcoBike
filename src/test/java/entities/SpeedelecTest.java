@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class SpeedelecTest {
   private Speedelec speedelec;
-  private final int bikeId = 1;
   private final TypeOfBike typeOfBike = TypeOfBike.SPEEDELEC;
   private final String brand = "Benetti";
   private final int maximumSpeed = 16;
@@ -20,19 +19,13 @@ class SpeedelecTest {
 
   @BeforeEach
   void beforeEach() {
-      speedelec = new Speedelec(bikeId,
-              brand,
+      speedelec = new Speedelec(brand,
               maximumSpeed,
               weight,
               availabilityLights,
               batteryCapacity,
               color,
               price);
-  }
-
-  @Test
-  void getId() {
-    assertEquals(bikeId, speedelec.getId());
   }
 
   @Test
@@ -111,8 +104,7 @@ class SpeedelecTest {
 
   @Test
   void equals() {
-    Speedelec newSpeedelec = new Speedelec(2,
-            "Intertool",
+    Speedelec newSpeedelec = new Speedelec("Intertool",
             21,
             16345,
             false,
@@ -120,8 +112,7 @@ class SpeedelecTest {
             "black",
             21999);
     Speedelec copySpeedelec = speedelec;
-    Speedelec fullCopySpeedelec = new Speedelec(bikeId,
-            brand,
+    Speedelec fullCopySpeedelec = new Speedelec(brand,
             maximumSpeed,
             weight,
             availabilityLights,

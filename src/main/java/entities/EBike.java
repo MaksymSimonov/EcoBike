@@ -11,15 +11,14 @@ public class EBike extends Bike {
 
   }
 
-  public EBike(int bikeId,
-               String brand,
+  public EBike(String brand,
                int maximumSpeed,
                int weight,
                boolean availabilityLights,
                int batteryCapacity,
                String color,
                int price) {
-    super(bikeId, TypeOfBike.EBIKE, brand, weight, availabilityLights, color, price);
+    super(TypeOfBike.EBIKE, brand, weight, availabilityLights, color, price);
     this.maximumSpeed = maximumSpeed;
     this.batteryCapacity = batteryCapacity;
   }

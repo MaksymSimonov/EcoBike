@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class FoldingBikeTest {
   private FoldingBike foldingBike;
-  private final int bikeId = 1;
   private final TypeOfBike typeOfBike = TypeOfBike.FOLDINGBIKE;
   private final String brand = "Benetti";
   private final int sizeOfWheels = 16;
@@ -20,19 +19,13 @@ class FoldingBikeTest {
 
   @BeforeEach
   void beforeEach() {
-    foldingBike = new FoldingBike(bikeId,
-            brand,
+    foldingBike = new FoldingBike(brand,
             sizeOfWheels,
             numberOfGears,
             weight,
             availabilityLights,
             color,
             price);
-  }
-
-  @Test
-  void getId() {
-    assertEquals(bikeId, foldingBike.getId());
   }
 
   @Test
@@ -111,8 +104,7 @@ class FoldingBikeTest {
 
   @Test
   void equals() {
-    FoldingBike newFoldingBike = new FoldingBike(2,
-           "Intertool",
+    FoldingBike newFoldingBike = new FoldingBike("Intertool",
            21,
            16,
            15300,
@@ -120,8 +112,7 @@ class FoldingBikeTest {
            "black",
            21999);
     FoldingBike copyFoldingBike = foldingBike;
-    FoldingBike fullCopyFoldingBike = new FoldingBike(bikeId,
-            brand,
+    FoldingBike fullCopyFoldingBike = new FoldingBike(brand,
             sizeOfWheels,
             numberOfGears,
             weight,

@@ -24,24 +24,21 @@ class DAOTreeMapBikeTest {
 
   @BeforeAll
   static void beforeAll() {
-    foldingBike = new FoldingBike(1,
-            "Benetti",
+    foldingBike = new FoldingBike("Benetti",
             16,
             24,
             11400,
             false,
             "silver",
             1195);
-    speedelec = new Speedelec(2,
-            "Dualtron",
+    speedelec = new Speedelec("Dualtron",
             30,
             14400,
             true,
             6500,
             "dark gray",
             1019);
-    eBike = new EBike(3,
-            "E-Motion",
+    eBike = new EBike("E-Motion",
             50,
             26600,
             false,
@@ -93,8 +90,7 @@ class DAOTreeMapBikeTest {
 
   @Test
   void update() {
-    EBike newEBike = new EBike(3,
-            "Lankeleisi",
+    EBike newEBike = new EBike("Lankeleisi",
             44,
             15400,
             true,

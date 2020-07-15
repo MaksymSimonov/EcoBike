@@ -26,24 +26,21 @@ class BikeControllerTest {
 
   @BeforeAll
   static void beforeAll() {
-    foldingBike = new FoldingBike(1,
-            "Benetti",
+    foldingBike = new FoldingBike("Benetti",
             16,
             24,
             11400,
             false,
             "silver",
             1195);
-    speedelec = new Speedelec(2,
-            "Dualtron",
+    speedelec = new Speedelec("Dualtron",
             30,
             14400,
             true,
             6500,
             "dark gray",
             1019);
-    eBike = new EBike(3,
-            "E-Motion",
+    eBike = new EBike("E-Motion",
             50,
             26600,
             false,
@@ -71,8 +68,7 @@ class BikeControllerTest {
 
   @Test
   void addFoldingBike() {
-    FoldingBike newFoldingBike = new FoldingBike(4,
-            "Formula",
+    FoldingBike newFoldingBike = new FoldingBike("Formula",
             21,
             34,
             9000,
@@ -87,8 +83,7 @@ class BikeControllerTest {
 
   @Test
   void addSpeedelec() {
-    Speedelec newSpeedelec = new Speedelec(4,
-            "Freego",
+    Speedelec newSpeedelec = new Speedelec("Freego",
             65,
             7600,
             false,
@@ -103,8 +98,7 @@ class BikeControllerTest {
 
   @Test
   void addEBike() {
-    EBike newEBike = new EBike(4,
-            "Gazelle",
+    EBike newEBike = new EBike("Gazelle",
             65,
             7600,
             false,

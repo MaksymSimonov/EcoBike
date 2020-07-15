@@ -11,15 +11,14 @@ public class Speedelec extends Bike {
 
   }
 
-  public Speedelec(int bikeId,
-                   String brand,
+  public Speedelec(String brand,
                    int maximumSpeed,
                    int weight,
                    boolean availabilityLights,
                    int batteryCapacity,
                    String color,
                    int price) {
-    super(bikeId, TypeOfBike.SPEEDELEC, brand, weight, availabilityLights, color, price);
+    super(TypeOfBike.SPEEDELEC, brand, weight, availabilityLights, color, price);
     this.maximumSpeed = maximumSpeed;
     this.batteryCapacity = batteryCapacity;
   }

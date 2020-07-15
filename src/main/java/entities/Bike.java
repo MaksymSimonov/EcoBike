@@ -29,14 +29,12 @@ public class Bike implements Identifiable{
     this.price = price;
   }
 
-  public Bike(int bikeId,
-              TypeOfBike typeOfBike,
+  public Bike(TypeOfBike typeOfBike,
               String brand,
               int weight,
               boolean availabilityLights,
               String color,
               int price) {
-    this.bikeId = bikeId;
     this.typeOfBike =  typeOfBike;
     this.brand = brand;
     this.weight = weight;
@@ -74,7 +72,7 @@ public class Bike implements Identifiable{
     return price;
   }
 
-  public void setBikeId(int bikeId) {
+  public void setId(int bikeId) {
     this.bikeId = bikeId;
   }
 

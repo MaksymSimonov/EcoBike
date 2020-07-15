@@ -11,15 +11,14 @@ public class FoldingBike extends Bike {
 
   }
 
-  public FoldingBike(int bikeId,
-                     String brand,
+  public FoldingBike(String brand,
                      int sizeOfWheels,
                      int numberOfGears,
                      int weight,
                      boolean availabilityLights,
                      String color,
                      int price) {
-    super(bikeId, TypeOfBike.FOLDINGBIKE,  brand, weight, availabilityLights, color, price);
+    super(TypeOfBike.FOLDINGBIKE,  brand, weight, availabilityLights, color, price);
     this.sizeOfWheels = sizeOfWheels;
     this.numberOfGears = numberOfGears;
   }
