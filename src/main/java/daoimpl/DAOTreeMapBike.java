@@ -77,66 +77,42 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
-  private FoldingBike retrieveFoldingBikeData(String dataLine){
+  private FoldingBike retrieveFoldingBikeData(String dataLine) {
     TypeOfBike typeOfBike = TypeOfBike.FOLDINGBIKE;
-    String brand;
-    int sizeOfWheels;
-    int numberOfGears;
-    int weight;
-    boolean availabilityLights;
-    String color;
-    int price;
-
     String[] params = dataLine.split("; ");
-    brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
-    sizeOfWheels = Integer.valueOf(params[1]);
-    numberOfGears = Integer.valueOf(params[2]);
-    weight = Integer.valueOf(params[3]);
-    availabilityLights = Boolean.valueOf(params[4]);
-    color = params[5];
-    price = Integer.valueOf(params[6]);
+    String brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
+    int sizeOfWheels = Integer.valueOf(params[1]);
+    int numberOfGears = Integer.valueOf(params[2]);
+    int weight = Integer.valueOf(params[3]);
+    boolean availabilityLights = Boolean.valueOf(params[4]);
+    String color = params[5];
+    int price = Integer.valueOf(params[6]);
     return new FoldingBike(brand, sizeOfWheels, numberOfGears, weight, availabilityLights, color, price);
   }
 
-  private Speedelec retrieveSpeedelecData(String dataLine){
+  private Speedelec retrieveSpeedelecData(String dataLine) {
     TypeOfBike typeOfBike = TypeOfBike.SPEEDELEC;
-    String brand;
-    int maximumSpeed;
-    int weight;
-    boolean availabilityLights;
-    int batteryCapacity;
-    String color;
-    int price;
-
     String[] params = dataLine.split("; ");
-    brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
-    maximumSpeed = Integer.valueOf(params[1]);
-    weight = Integer.valueOf(params[2]);
-    availabilityLights = Boolean.valueOf(params[3]);
-    batteryCapacity = Integer.valueOf(params[4]);
-    color = params[5];
-    price = Integer.valueOf(params[6]);
+    String brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
+    int maximumSpeed = Integer.valueOf(params[1]);
+    int weight = Integer.valueOf(params[2]);
+    boolean availabilityLights = Boolean.valueOf(params[3]);
+    int batteryCapacity = Integer.valueOf(params[4]);
+    String color = params[5];
+    int price = Integer.valueOf(params[6]);
     return new Speedelec(brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
-  private EBike retrieveEBikeData(String dataLine){
+  private EBike retrieveEBikeData(String dataLine) {
     TypeOfBike typeOfBike = TypeOfBike.EBIKE;
-    String brand;
-    int maximumSpeed;
-    int weight;
-    boolean availabilityLights;
-    int batteryCapacity;
-    String color;
-    int price;
-
     String[] params = dataLine.split("; ");
-    brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
-    maximumSpeed = Integer.valueOf(params[1]);
-    weight = Integer.valueOf(params[2]);
-    availabilityLights = Boolean.valueOf(params[3]);
-    batteryCapacity = Integer.valueOf(params[4]);
-    color = params[5];
-    price = Integer.valueOf(params[6]);
+    String brand = params[0].substring(typeOfBike.getFullNameOfType().length(), params[0].length()).trim();
+    int maximumSpeed = Integer.valueOf(params[1]);
+    int weight = Integer.valueOf(params[2]);
+    boolean availabilityLights = Boolean.valueOf(params[3]);
+    int batteryCapacity = Integer.valueOf(params[4]);
+    String color = params[5];
+    int price = Integer.valueOf(params[6]);
     return new EBike(brand, maximumSpeed, weight, availabilityLights, batteryCapacity, color, price);
   }
 
@@ -199,7 +175,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     }
   }
 
-  private String convertFoldingBikeToStr(FoldingBike foldingBike){
+  private String convertFoldingBikeToStr(FoldingBike foldingBike) {
     StringBuffer stringBuffer = new StringBuffer();
     stringBuffer.append(foldingBike.getTypeOfBike().getFullNameOfType()).append(' ')
             .append(foldingBike.getBrand()).append("; ")
@@ -214,7 +190,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     return stringBuffer.toString();
   }
 
-  private String convertSpeedelecToStr(Speedelec speedelec){
+  private String convertSpeedelecToStr(Speedelec speedelec) {
     StringBuffer stringBuffer = new StringBuffer();
     stringBuffer.append(speedelec.getTypeOfBike().getFullNameOfType()).append(' ')
             .append(speedelec.getBrand()).append("; ")
@@ -229,7 +205,7 @@ public class DAOTreeMapBike implements DAOFactory<Identifiable> {
     return stringBuffer.toString();
   }
 
-  private String convertEBikeToStr(EBike eBike){
+  private String convertEBikeToStr(EBike eBike) {
     StringBuffer stringBuffer = new StringBuffer();
     stringBuffer.append(eBike.getTypeOfBike().getFullNameOfType()).append(' ')
             .append(eBike.getBrand()).append("; ")
